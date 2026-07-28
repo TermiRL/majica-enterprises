@@ -13,6 +13,24 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Mobile Menu Toggle
+    const mobileBtn = document.getElementById('mobile-menu-btn');
+    const navLinks = document.getElementById('nav-links');
+    if (mobileBtn && navLinks) {
+        mobileBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            mobileBtn.innerHTML = navLinks.classList.contains('active') ? '✕' : '☰';
+        });
+        
+        // Close menu when clicking a link
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                mobileBtn.innerHTML = '☰';
+            });
+        });
+    }
+
     // Intersection Observer
     const observerOptions = { threshold: 0.1, rootMargin: "0px 0px -40px 0px" };
     const observer = new IntersectionObserver((entries) => {
@@ -26,14 +44,14 @@ document.addEventListener('DOMContentLoaded', () => {
     
     document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 
-    // Apple-Style 3D Scroll Reveal logic
+    // Apple-Style 3D Scroll Reveal logic (Only run on desktop)
     const scrollTrack = document.getElementById('scrollHeroTrack');
     const stage = document.getElementById('revealStage');
     const cards = document.querySelectorAll('.reveal-card');
     const dots = document.querySelectorAll('.dot');
 
     function updateScrollReveal() {
-        if (!scrollTrack || !stage) return;
+        if (!scrollTrack || !stage || window.innerWidth <= 992) return;
 
         const rect = scrollTrack.getBoundingClientRect();
         const totalScroll = scrollTrack.offsetHeight - window.innerHeight;
@@ -79,6 +97,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (scrollTrack && stage) {
         window.addEventListener('scroll', updateScrollReveal);
+        window.addEventListener('resize', updateScrollReveal);
         updateScrollReveal();
     }
 });

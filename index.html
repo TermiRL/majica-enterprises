@@ -2,9 +2,48 @@
 <html lang="de" data-theme="dark">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home | Majica Enterprises</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>Startseite | Majica Enterprises</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Majica Enterprises vereint gestalterische Identität, zuverlässige Software-Entwicklung und hochwertige Sachgüter unter einem kompromisslosen Qualitätsstandard.">
+    <meta name="author" content="Majica Enterprises">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph / Social Media -->
+    <meta property="og:title" content="Startseite | Majica Enterprises">
+    <meta property="og:description" content="Majica Enterprises vereint gestalterische Identität, zuverlässige Software-Entwicklung und hochwertige Sachgüter unter einem kompromisslosen Qualitätsstandard.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://majica-enterprises.com/">
+    <meta property="og:site_name" content="Majica Enterprises">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Startseite | Majica Enterprises">
+    <meta name="twitter:description" content="Majica Enterprises vereint gestalterische Identität, zuverlässige Software-Entwicklung und hochwertige Sachgüter unter einem kompromisslosen Qualitätsstandard.">
+    
+    <!-- Favicons (Safari & Alle Browser Kompatibilität) -->
+    <link rel="icon" type="image/png" href="assets/favicon.png">
+    <link rel="apple-touch-icon" href="assets/favicon.png">
+    
+    <!-- Stylesheets -->
     <link rel="stylesheet" href="assets/style.css">
+    
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Majica Enterprises",
+      "url": "https://majica-enterprises.com",
+      "logo": "https://majica-enterprises.com/assets/logo-white.png",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "email": "kontakt@majica-enterprises.com",
+        "contactType": "customer service"
+      }
+    }
+    </script>
 </head>
 <body>
     <div class="bg-grid"></div>
@@ -13,22 +52,28 @@
         <div class="nav-container">
             <a href="index.html" class="logo">
 
-                <img src="/assets/logo-white.png" alt="Majica Enterprises Logo" class="logo-icon logo-for-dark-theme">
-                <img src="/assets/logo-black.png" alt="Majica Enterprises Logo" class="logo-icon logo-for-light-theme">
+                <img src="assets/logo-white.png" alt="Majica Enterprises Logo" class="logo-icon logo-for-dark-theme">
+                <img src="assets/logo-black.png" alt="Majica Enterprises Logo" class="logo-icon logo-for-light-theme">
     
                 Majica Enterprises
             </a>
-            <div class="nav-links">
+            
+            <div class="nav-actions">
+                <button id="theme-toggle" title="Designmodus anpassen" aria-label="Theme umschalten">◐</button>
+                <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Menü öffnen">☰</button>
+            </div>
+            
+            <div class="nav-links" id="nav-links">
                 <a href="ueber-uns/index.html">Über uns</a>
                 <a href="geschaeftsbereiche/index.html">Geschäftsbereiche</a>
                 <a href="innovation/index.html">Innovation</a>
                 <a href="team/index.html">Team</a>
                 <a href="kontakt/index.html">Kontakt</a>
-                <button id="theme-toggle" title="Designmodus anpassen">◐</button>
             </div>
         </div>
     </nav>
 
+    <main>
 
     <!-- APPLE-STYLE 3D SCROLL REVEAL HERO -->
     <div class="scroll-hero-container" id="scrollHeroTrack">
@@ -36,7 +81,7 @@
             <div class="hero-header-reveal">
                 <div class="section-tag">Majica Enterprises // Studio 2026</div>
                 <h1>Gestaltung. Technik. <span class="gradient-text">Substanz.</span></h1>
-                <p>Scrollen Sie nach unten, um das Portfolio freizuschalten.</p>
+                <p>Wir verbinden digitale Eleganz mit technischer Präzision.</p>
             </div>
 
             <div class="reveal-stage" id="revealStage">
@@ -83,38 +128,38 @@
         <div class="container fade-up">
             <div class="text-center" style="max-width: 760px; margin: 0 auto 4rem;">
                 <div class="section-tag">// UNSER ANSPRUCH</div>
-                <h2 style="font-size: 2.8rem; margin-bottom: 1rem;">Drei Säulen. Ein kompromissloser Qualitätsstandard.</h2>
-                <p style="color: var(--text-muted); font-size: 1.1rem;">
-                    Wir verbinden digitale Eleganz mit technischer Präzision und haptischer Wertigkeit.
+                <h2>Drei Säulen. Ein kompromissloser Qualitätsstandard.</h2>
+                <p style="color: var(--text-muted); font-size: clamp(1rem, 2vw, 1.1rem);">
+                    Wir entwickeln durchdachte Lösungen für digitale und physische Räume.
                 </p>
             </div>
 
             <div class="grid">
                 <div class="card">
                     <div class="section-tag">01 // CREATIVE</div>
-                    <h3 style="font-size: 1.5rem; margin: 0.8rem 0;">MAJICA Design</h3>
-                    <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.6;">
+                    <h3>MAJICA Design</h3>
+                    <p>
                         Visuelle Erscheinungsbilder, die Charakter zeigen. Wir entwickeln durchdachte Brandings, Art Direction und digitale Interfaces mit klarer Haltung.
                     </p>
-                    <a href="geschaeftsbereiche/index.html" class="btn btn-secondary" style="margin-top: 1.5rem; width: 100%;">Sparte erkunden</a>
+                    <a href="geschaeftsbereiche/index.html" class="btn btn-secondary" style="margin-top: 1.5rem;">Sparte erkunden</a>
                 </div>
 
                 <div class="card">
                     <div class="section-tag">02 // TECH</div>
-                    <h3 style="font-size: 1.5rem; margin: 0.8rem 0;">MAJICA Development</h3>
-                    <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.6;">
+                    <h3>MAJICA Development</h3>
+                    <p>
                         Moderne Softwareentwicklung ohne Kompromisse. Maßgeschneiderte Webanwendungen, schnelle APIs und skalierbare Infrastrukturen.
                     </p>
-                    <a href="geschaeftsbereiche/index.html" class="btn btn-secondary" style="margin-top: 1.5rem; width: 100%;">Sparte erkunden</a>
+                    <a href="geschaeftsbereiche/index.html" class="btn btn-secondary" style="margin-top: 1.5rem;">Sparte erkunden</a>
                 </div>
 
                 <div class="card">
                     <div class="section-tag">03 // CRAFT</div>
-                    <h3 style="font-size: 1.5rem; margin: 0.8rem 0;">MAJICA Maison</h3>
-                    <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.6;">
+                    <h3>MAJICA Maison</h3>
+                    <p>
                         Physische Produkte mit nachhaltigem Anforderungsprofil. Ausgewählte Materialien, langlebige Verarbeitungen und zeitloses Design.
                     </p>
-                    <a href="geschaeftsbereiche/index.html" class="btn btn-secondary" style="margin-top: 1.5rem; width: 100%;">Sparte erkunden</a>
+                    <a href="geschaeftsbereiche/index.html" class="btn btn-secondary" style="margin-top: 1.5rem;">Sparte erkunden</a>
                 </div>
             </div>
         </div>
@@ -124,21 +169,22 @@
     <section class="section fade-up" style="background: var(--bg-sec); border-top: 1px solid var(--card-border);">
         <div class="container text-center" style="max-width: 720px;">
             <div class="section-tag">// ZUSAMMENARBEIT</div>
-            <h2 style="font-size: 2.5rem;">Bereit für das nächste Kapitel?</h2>
-            <p style="color: var(--text-muted); margin: 1.2rem 0 2.2rem; font-size: 1.1rem;">
+            <h2>Bereit für das nächste Kapitel?</h2>
+            <p style="color: var(--text-muted); margin: 1.2rem 0 2.2rem; font-size: clamp(1rem, 2vw, 1.1rem);">
                 Wir begleiten Projekte von der ersten Idee bis zur finalen Umsetzung in Design, Code oder Fertigung.
             </p>
             <a href="kontakt/index.html" class="btn btn-primary">Kontakt aufnehmen</a>
         </div>
     </section>
 
+    </main>
 
     <footer>
         <div class="container">
             <a href="index.html" class="logo" style="justify-content: center; margin-bottom: 1.2rem;">
 
-                <img src="/assets/logo-white.png" alt="Majica Enterprises Logo" class="logo-icon logo-for-dark-theme">
-                <img src="/assets/logo-black.png" alt="Majica Enterprises Logo" class="logo-icon logo-for-light-theme">
+                <img src="assets/logo-white.png" alt="Majica Enterprises Logo" class="logo-icon logo-for-dark-theme">
+                <img src="assets/logo-black.png" alt="Majica Enterprises Logo" class="logo-icon logo-for-light-theme">
     
                 Majica Enterprises
             </a>

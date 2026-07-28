@@ -2,9 +2,48 @@
 <html lang="de" data-theme="dark">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
     <title>Impressum | Majica Enterprises</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Impressum von Majica Enterprises. Rechtliche Angaben und Kontaktinformationen.">
+    <meta name="author" content="Majica Enterprises">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph / Social Media -->
+    <meta property="og:title" content="Impressum | Majica Enterprises">
+    <meta property="og:description" content="Impressum von Majica Enterprises. Rechtliche Angaben und Kontaktinformationen.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://majica-enterprises.com/impressum/">
+    <meta property="og:site_name" content="Majica Enterprises">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Impressum | Majica Enterprises">
+    <meta name="twitter:description" content="Impressum von Majica Enterprises. Rechtliche Angaben und Kontaktinformationen.">
+    
+    <!-- Favicons (Safari & Alle Browser Kompatibilität) -->
+    <link rel="icon" type="image/png" href="../assets/favicon.png">
+    <link rel="apple-touch-icon" href="../assets/favicon.png">
+    
+    <!-- Stylesheets -->
     <link rel="stylesheet" href="../assets/style.css">
+    
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Majica Enterprises",
+      "url": "https://majica-enterprises.com",
+      "logo": "https://majica-enterprises.com/assets/logo-white.png",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "email": "kontakt@majica-enterprises.com",
+        "contactType": "customer service"
+      }
+    }
+    </script>
 </head>
 <body>
     <div class="bg-grid"></div>
@@ -18,26 +57,32 @@
     
                 Majica Enterprises
             </a>
-            <div class="nav-links">
+            
+            <div class="nav-actions">
+                <button id="theme-toggle" title="Designmodus anpassen" aria-label="Theme umschalten">◐</button>
+                <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Menü öffnen">☰</button>
+            </div>
+            
+            <div class="nav-links" id="nav-links">
                 <a href="../ueber-uns/index.html">Über uns</a>
                 <a href="../geschaeftsbereiche/index.html">Geschäftsbereiche</a>
                 <a href="../innovation/index.html">Innovation</a>
                 <a href="../team/index.html">Team</a>
                 <a href="../kontakt/index.html">Kontakt</a>
-                <button id="theme-toggle" title="Designmodus anpassen">◐</button>
             </div>
         </div>
     </nav>
 
+    <main>
 
-    <section class="section" style="padding-top: 10rem;">
+    <section class="section" style="padding-top: clamp(6rem, 15vw, 10rem);">
         <div class="container fade-up" style="max-width: 850px;">
             <div class="section-tag">// RECHTLICHES</div>
-            <h1 style="font-size: 3.2rem; margin-bottom: 2rem;">Impressum</h1>
+            <h1>Impressum</h1>
             
-            <div class="legal-box">
+            <div class="card" style="margin-top: 2rem; padding: clamp(2rem, 4vw, 3rem); line-height: 1.8;">
                 <h2>Angaben gemäß § 5 TMG</h2>
-                <p>
+                <p style="color: var(--text-muted); margin-bottom: 1.5rem;">
                     <strong>Majica Enterprises</strong><br>
                     Giuseppe Antonio Majica (Geschäftsführer)<br>
                     Pater-Dionysius-Str. 41<br>
@@ -45,37 +90,33 @@
                     Deutschland
                 </p>
 
-                <h2>Verantwortlich für den Inhalt nach § 55 Abs. 2 RStV</h2>
-                <p>
+                <h2 style="font-size: 1.5rem;">Verantwortlich für den Inhalt nach § 55 Abs. 2 RStV</h2>
+                <p style="color: var(--text-muted); margin-bottom: 1.5rem;">
                     Giuseppe Antonio Majica<br>
                     Pater-Dionysius-Str. 41<br>
                     50767 Köln-Chorweiler
                 </p>
 
-                <h2>Haftung für Inhalte</h2>
-                <p>
+                <h2 style="font-size: 1.5rem;">Haftung für Inhalte</h2>
+                <p style="color: var(--text-muted); margin-bottom: 1.5rem;">
                     Als Diensteanbieter sind wir gemäß § 7 Abs. 1 TMG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich.
                 </p>
 
-                <h2>Haftung für Links</h2>
-                <p>
-                    Unser Angebot enthält Links zu externen Webseiten Dritter, auf deren Inhalte wir keinen Einfluss haben. Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber verantwortlich.
-                </p>
-
-                <h2>Urheberrecht</h2>
-                <p>
+                <h2 style="font-size: 1.5rem;">Urheberrecht</h2>
+                <p style="color: var(--text-muted); margin-bottom: 1.5rem;">
                     Die durch die Seitenbetreiber erstellten Inhalte und Werke unterliegen dem deutschen Urheberrecht. Die Vervielfältigung, Bearbeitung oder Verbreitung außerhalb der Grenzen des Urheberrechtes bedürfen der schriftlichen Zustimmung des jeweiligen Autors.
                 </p>
 
-                <h2>Streitschlichtung</h2>
-                <p>
+                <h2 style="font-size: 1.5rem;">Streitschlichtung</h2>
+                <p style="color: var(--text-muted);">
                     EU-Plattform zur Online-Streitbeilegung (OS):<br>
-                    <a href="https://ec.europa.eu/consumers/odr" target="_blank" rel="noopener noreferrer">https://ec.europa.eu/consumers/odr</a>
+                    <a href="https://ec.europa.eu/consumers/odr" target="_blank" rel="noopener noreferrer" style="color: var(--text-main);">https://ec.europa.eu/consumers/odr</a>
                 </p>
             </div>
         </div>
     </section>
 
+    </main>
 
     <footer>
         <div class="container">

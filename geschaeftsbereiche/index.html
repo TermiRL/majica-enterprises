@@ -2,9 +2,48 @@
 <html lang="de" data-theme="dark">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
     <title>Geschäftsbereiche | Majica Enterprises</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Entdecken Sie unsere spezialisierten Sparten: Design, Development und Maison.">
+    <meta name="author" content="Majica Enterprises">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph / Social Media -->
+    <meta property="og:title" content="Geschäftsbereiche | Majica Enterprises">
+    <meta property="og:description" content="Entdecken Sie unsere spezialisierten Sparten: Design, Development und Maison.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://majica-enterprises.com/geschaeftsbereiche/">
+    <meta property="og:site_name" content="Majica Enterprises">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Geschäftsbereiche | Majica Enterprises">
+    <meta name="twitter:description" content="Entdecken Sie unsere spezialisierten Sparten: Design, Development und Maison.">
+    
+    <!-- Favicons (Safari & Alle Browser Kompatibilität) -->
+    <link rel="icon" type="image/png" href="../assets/favicon.png">
+    <link rel="apple-touch-icon" href="../assets/favicon.png">
+    
+    <!-- Stylesheets -->
     <link rel="stylesheet" href="../assets/style.css">
+    
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Majica Enterprises",
+      "url": "https://majica-enterprises.com",
+      "logo": "https://majica-enterprises.com/assets/logo-white.png",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "email": "kontakt@majica-enterprises.com",
+        "contactType": "customer service"
+      }
+    }
+    </script>
 </head>
 <body>
     <div class="bg-grid"></div>
@@ -18,32 +57,38 @@
     
                 Majica Enterprises
             </a>
-            <div class="nav-links">
+            
+            <div class="nav-actions">
+                <button id="theme-toggle" title="Designmodus anpassen" aria-label="Theme umschalten">◐</button>
+                <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Menü öffnen">☰</button>
+            </div>
+            
+            <div class="nav-links" id="nav-links">
                 <a href="../ueber-uns/index.html">Über uns</a>
                 <a href="../geschaeftsbereiche/index.html" class="active">Geschäftsbereiche</a>
                 <a href="../innovation/index.html">Innovation</a>
                 <a href="../team/index.html">Team</a>
                 <a href="../kontakt/index.html">Kontakt</a>
-                <button id="theme-toggle" title="Designmodus anpassen">◐</button>
             </div>
         </div>
     </nav>
 
+    <main>
 
-    <section class="section" style="padding-top: 10rem;">
+    <section class="section" style="padding-top: clamp(6rem, 15vw, 10rem);">
         <div class="container">
             <div class="text-center fade-up" style="margin-bottom: 4.5rem; max-width: 800px; margin-inline: auto;">
                 <div class="section-tag">// CORE DIVISIONS</div>
-                <h1 style="font-size: 3.5rem;">Unsere <span class="gradient-text">Geschäftsbereiche</span></h1>
-                <p style="color: var(--text-muted); font-size: 1.15rem; margin-top: 1.2rem;">
+                <h1>Unsere <span class="gradient-text">Geschäftsbereiche</span></h1>
+                <p style="color: var(--text-muted); font-size: clamp(1rem, 2vw, 1.15rem); margin-top: 1.2rem;">
                     Drei spezialisierte Sparten, vereint unter dem Dach von Majica Enterprises.
                 </p>
             </div>
             
-            <div class="grid" style="gap: 2.5rem;">
+            <div class="grid">
                 <div class="card fade-up">
                     <div class="section-tag">DIVISION 01</div>
-                    <h2 style="margin: 0.8rem 0;">MAJICA Design</h2>
+                    <h2 style="margin: 0.8rem 0; font-size: clamp(1.5rem, 3vw, 2rem);">MAJICA Design</h2>
                     <p style="color: var(--text-muted); margin-bottom: 1.5rem;">
                         Visuelle Identitäten, Markenstrategie, Typografie und Art Direction.
                     </p>
@@ -52,7 +97,7 @@
 
                 <div class="card fade-up" style="transition-delay: 0.1s;">
                     <div class="section-tag">DIVISION 02</div>
-                    <h2 style="margin: 0.8rem 0;">MAJICA Development</h2>
+                    <h2 style="margin: 0.8rem 0; font-size: clamp(1.5rem, 3vw, 2rem);">MAJICA Development</h2>
                     <p style="color: var(--text-muted); margin-bottom: 1.5rem;">
                         Web-Anwendungen, Cloud-Systeme, Schnittstellen und Prozess-Automatisierung.
                     </p>
@@ -61,7 +106,7 @@
 
                 <div class="card fade-up" style="transition-delay: 0.2s;">
                     <div class="section-tag">DIVISION 03</div>
-                    <h2 style="margin: 0.8rem 0;">MAJICA Maison</h2>
+                    <h2 style="margin: 0.8rem 0; font-size: clamp(1.5rem, 3vw, 2rem);">MAJICA Maison</h2>
                     <p style="color: var(--text-muted); margin-bottom: 1.5rem;">
                         Atelier, Mode-Kollektionen und hochwertige physische Accessoires.
                     </p>
@@ -71,6 +116,7 @@
         </div>
     </section>
 
+    </main>
 
     <footer>
         <div class="container">

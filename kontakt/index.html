@@ -2,9 +2,48 @@
 <html lang="de" data-theme="dark">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
     <title>Kontakt | Majica Enterprises</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Nehmen Sie Kontakt mit Majica Enterprises auf. Wir freuen uns auf Ihre Projektanfrage.">
+    <meta name="author" content="Majica Enterprises">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph / Social Media -->
+    <meta property="og:title" content="Kontakt | Majica Enterprises">
+    <meta property="og:description" content="Nehmen Sie Kontakt mit Majica Enterprises auf. Wir freuen uns auf Ihre Projektanfrage.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://majica-enterprises.com/kontakt/">
+    <meta property="og:site_name" content="Majica Enterprises">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Kontakt | Majica Enterprises">
+    <meta name="twitter:description" content="Nehmen Sie Kontakt mit Majica Enterprises auf. Wir freuen uns auf Ihre Projektanfrage.">
+    
+    <!-- Favicons (Safari & Alle Browser Kompatibilität) -->
+    <link rel="icon" type="image/png" href="../assets/favicon.png">
+    <link rel="apple-touch-icon" href="../assets/favicon.png">
+    
+    <!-- Stylesheets -->
     <link rel="stylesheet" href="../assets/style.css">
+    
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Majica Enterprises",
+      "url": "https://majica-enterprises.com",
+      "logo": "https://majica-enterprises.com/assets/logo-white.png",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "email": "kontakt@majica-enterprises.com",
+        "contactType": "customer service"
+      }
+    }
+    </script>
 </head>
 <body>
     <div class="bg-grid"></div>
@@ -18,57 +57,67 @@
     
                 Majica Enterprises
             </a>
-            <div class="nav-links">
+            
+            <div class="nav-actions">
+                <button id="theme-toggle" title="Designmodus anpassen" aria-label="Theme umschalten">◐</button>
+                <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Menü öffnen">☰</button>
+            </div>
+            
+            <div class="nav-links" id="nav-links">
                 <a href="../ueber-uns/index.html">Über uns</a>
                 <a href="../geschaeftsbereiche/index.html">Geschäftsbereiche</a>
                 <a href="../innovation/index.html">Innovation</a>
                 <a href="../team/index.html">Team</a>
                 <a href="../kontakt/index.html" class="active">Kontakt</a>
-                <button id="theme-toggle" title="Designmodus anpassen">◐</button>
             </div>
         </div>
     </nav>
 
+    <main>
 
-    <section class="section" style="padding-top: 10rem;">
+    <section class="section" style="padding-top: clamp(6rem, 15vw, 10rem);">
         <div class="container">
-            <div class="grid" style="align-items: start; gap: 4rem;">
+            <div class="contact-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start;">
                 <div class="fade-up">
                     <div class="section-tag">// KONTAKT</div>
-                    <h1 style="font-size: 3.5rem;">Treten Sie mit uns in <span class="gradient-text">Verbindung.</span></h1>
-                    <p style="color: var(--text-muted); margin: 2rem 0; font-size: 1.1rem; line-height: 1.7;">
+                    <h1>Treten Sie mit uns in <span class="gradient-text">Verbindung.</span></h1>
+                    <p style="color: var(--text-muted); margin: 2rem 0; font-size: clamp(1rem, 2vw, 1.1rem); line-height: 1.7;">
                         Wir freuen uns auf Ihre Anfrage bezüglich Design, Software-Entwicklung oder Produkten aus unserem Atelier.
                     </p>
                     
                     <div style="background: var(--card-bg); padding: 2rem; border-radius: var(--radius); border: 1px solid var(--card-border);">
-                        <h4 style="margin-bottom: 0.8rem; font-size: 1.2rem;">Majica Enterprises</h4>
-                        <p style="color: var(--text-muted); line-height: 1.7;">
+                        <h4 style="margin-bottom: 0.8rem;">Majica Enterprises</h4>
+                        <address style="color: var(--text-muted); line-height: 1.7; font-style: normal;">
                             Giuseppe Antonio Majica<br>
                             Pater-Dionysius-Str. 41<br>
                             50767 Köln<br><br>
-                            E-Mail: giuseppe@majica.de
-                        </p>
+                            E-Mail: kontakt@majica-enterprises.com
+                        </address>
                     </div>
                 </div>
 
                 <div class="card fade-up" style="transition-delay: 0.15s;">
                     <form onsubmit="event.preventDefault(); alert('Vielen Dank für Ihre Nachricht. Wir melden uns umgehend bei Ihnen.');">
-                        <label style="display: block; font-size: 0.85rem; font-weight: 700; margin-bottom: 0.4rem; color: var(--text-muted);">Name</label>
-                        <input type="text" placeholder="Ihr Name" required>
+                        <label style="display: block; font-size: 0.85rem; font-weight: 700; margin-bottom: 0.4rem; color: var(--text-muted);" for="name">Name</label>
+                        <input type="text" id="name" name="name" placeholder="Ihr Name" required>
                         
-                        <label style="display: block; font-size: 0.85rem; font-weight: 700; margin-bottom: 0.4rem; color: var(--text-muted);">E-Mail</label>
-                        <input type="email" placeholder="ihre.adresse@domain.de" required>
+                        <label style="display: block; font-size: 0.85rem; font-weight: 700; margin-bottom: 0.4rem; color: var(--text-muted);" for="email">E-Mail</label>
+                        <input type="email" id="email" name="email" placeholder="ihre.adresse@domain.de" required>
                         
-                        <label style="display: block; font-size: 0.85rem; font-weight: 700; margin-bottom: 0.4rem; color: var(--text-muted);">Nachricht</label>
-                        <textarea rows="4" placeholder="Ihre Nachricht..." required></textarea>
+                        <label style="display: block; font-size: 0.85rem; font-weight: 700; margin-bottom: 0.4rem; color: var(--text-muted);" for="message">Nachricht</label>
+                        <textarea id="message" name="message" rows="5" placeholder="Ihre Nachricht..." required></textarea>
                         
                         <button type="submit" class="btn btn-primary" style="width: 100%;">Nachricht senden</button>
                     </form>
                 </div>
             </div>
+            <style>
+              @media (max-width: 992px) { .contact-grid { grid-template-columns: 1fr !important; } }
+            </style>
         </div>
     </section>
 
+    </main>
 
     <footer>
         <div class="container">
