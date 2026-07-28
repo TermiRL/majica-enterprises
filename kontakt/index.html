@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="de" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kontakt | Majica Enterprises</title>
+    <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+    <div class="bg-grid"></div>
+    
+    <nav>
+        <div class="nav-container">
+            <a href="../index.html" class="logo">
+
+                <img src="../assets/logo-white.png" alt="Majica Enterprises Logo" class="logo-icon logo-for-dark-theme">
+                <img src="../assets/logo-black.png" alt="Majica Enterprises Logo" class="logo-icon logo-for-light-theme">
+    
+                Majica Enterprises
+            </a>
+            <div class="nav-links">
+                <a href="../ueber-uns/index.html">Über uns</a>
+                <a href="../geschaeftsbereiche/index.html">Geschäftsbereiche</a>
+                <a href="../innovation/index.html">Innovation</a>
+                <a href="../team/index.html">Team</a>
+                <a href="../kontakt/index.html" class="active">Kontakt</a>
+                <button id="theme-toggle" title="Designmodus anpassen">◐</button>
+            </div>
+        </div>
+    </nav>
+
+
+    <section class="section" style="padding-top: 10rem;">
+        <div class="container">
+            <div class="grid" style="align-items: start; gap: 4rem;">
+                <div class="fade-up">
+                    <div class="section-tag">// KONTAKT</div>
+                    <h1 style="font-size: 3.5rem;">Treten Sie mit uns in <span class="gradient-text">Verbindung.</span></h1>
+                    <p style="color: var(--text-muted); margin: 2rem 0; font-size: 1.1rem; line-height: 1.7;">
+                        Wir freuen uns auf Ihre Anfrage bezüglich Design, Software-Entwicklung oder Produkten aus unserem Atelier.
+                    </p>
+                    
+                    <div style="background: var(--card-bg); padding: 2rem; border-radius: var(--radius); border: 1px solid var(--card-border);">
+                        <h4 style="margin-bottom: 0.8rem; font-size: 1.2rem;">Majica Enterprises</h4>
+                        <p style="color: var(--text-muted); line-height: 1.7;">
+                            Giuseppe Antonio Majica<br>
+                            Pater-Dionysius-Str. 41<br>
+                            50767 Köln<br><br>
+                            E-Mail: giuseppe@majica.de
+                        </p>
+                    </div>
+                </div>
+
+                <div class="card fade-up" style="transition-delay: 0.15s;">
+                    <form onsubmit="event.preventDefault(); alert('Vielen Dank für Ihre Nachricht. Wir melden uns umgehend bei Ihnen.');">
+                        <label style="display: block; font-size: 0.85rem; font-weight: 700; margin-bottom: 0.4rem; color: var(--text-muted);">Name</label>
+                        <input type="text" placeholder="Ihr Name" required>
+                        
+                        <label style="display: block; font-size: 0.85rem; font-weight: 700; margin-bottom: 0.4rem; color: var(--text-muted);">E-Mail</label>
+                        <input type="email" placeholder="ihre.adresse@domain.de" required>
+                        
+                        <label style="display: block; font-size: 0.85rem; font-weight: 700; margin-bottom: 0.4rem; color: var(--text-muted);">Nachricht</label>
+                        <textarea rows="4" placeholder="Ihre Nachricht..." required></textarea>
+                        
+                        <button type="submit" class="btn btn-primary" style="width: 100%;">Nachricht senden</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <footer>
+        <div class="container">
+            <a href="../index.html" class="logo" style="justify-content: center; margin-bottom: 1.2rem;">
+
+                <img src="../assets/logo-white.png" alt="Majica Enterprises Logo" class="logo-icon logo-for-dark-theme">
+                <img src="../assets/logo-black.png" alt="Majica Enterprises Logo" class="logo-icon logo-for-light-theme">
+    
+                Majica Enterprises
+            </a>
+            <div class="footer-links">
+                <a href="../ueber-uns/index.html">Über uns</a>
+                <a href="../geschaeftsbereiche/index.html">Geschäftsbereiche</a>
+                <a href="../innovation/index.html">Innovation</a>
+                <a href="../team/index.html">Team</a>
+                <a href="../kontakt/index.html">Kontakt</a>
+            </div>
+            <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: 1rem;">© 2026 Majica Enterprises. Design · Development · Maison.</p>
+            <div class="footer-legal">
+                <a href="../impressum/index.html">Impressum</a>
+                <a href="../datenschutz/index.html">Datenschutzpolitik</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../assets/main.js"></script>
+</body>
+</html>
