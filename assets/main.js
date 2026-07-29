@@ -1,15 +1,73 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Theme Toggle
-    const themeToggle = document.getElementById('theme-toggle');
-    const currentTheme = localStorage.getItem('theme') || 'dark';
-    document.documentElement.setAttribute('data-theme', currentTheme);
     
+    // Cookie Badge Logic
+    const cookieBadge = document.getElementById('cookie-badge');
+    const btnAccept = document.getElementById('cookie-accept');
+    const btnDecline = document.getElementById('cookie-decline');
+    
+    let hasConsent = localStorage.getItem('cookieConsent');
+    
+    if (!hasConsent) {
+        setTimeout(() => { cookieBadge.classList.add('show'); }, 1500);
+    }
+
+    if (btnAccept && btnDecline) {
+        btnAccept.addEventListener('click', () => {
+            localStorage.setItem('cookieConsent', 'true');
+            cookieBadge.classList.remove('show');
+        });
+        btnDecline.addEventListener('click', () => {
+            localStorage.setItem('cookieConsent', 'false');
+            localStorage.removeItem('theme'); // Clean up if declined
+            cookieBadge.classList.remove('show');
+        });
+    }
+
+    // Theme Toggle & Paint Bucket Logic
+    const themeToggle = document.getElementById('theme-toggle');
+    
+    // Initial Theme Load
+    let savedTheme = 'dark'; // Default
+    if (hasConsent === 'true') {
+        savedTheme = localStorage.getItem('theme') || 'dark';
+    }
+    document.documentElement.setAttribute('data-theme', savedTheme);
+
     if (themeToggle) {
         themeToggle.addEventListener('click', () => {
-            let theme = document.documentElement.getAttribute('data-theme');
-            let newTheme = theme === 'light' ? 'dark' : 'light';
-            document.documentElement.setAttribute('data-theme', newTheme);
-            localStorage.setItem('theme', newTheme);
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            
+            // Create Paint Bucket Overlay
+            const overlay = document.createElement('div');
+            overlay.className = 'theme-overlay';
+            // Set color of the "paint" to the background of the incoming theme
+            overlay.style.backgroundColor = newTheme === 'light' ? '#FAFAFC' : '#0A0A0C';
+            document.body.appendChild(overlay);
+            
+            // Trigger drop animation
+            requestAnimationFrame(() => {
+                overlay.classList.add('drop');
+            });
+
+            // Mid-animation (when screen is covered), switch the actual DOM theme instantly
+            setTimeout(() => {
+                document.documentElement.setAttribute('data-theme', newTheme);
+                if (localStorage.getItem('cookieConsent') === 'true') {
+                    localStorage.setItem('theme', newTheme);
+                }
+            }, 600); // Corresponds to transition duration in CSS
+
+            // Slide out the overlay downwards
+            setTimeout(() => {
+                overlay.classList.remove('drop');
+                overlay.classList.add('slide-out');
+                
+                // Cleanup DOM
+                setTimeout(() => {
+                    overlay.remove();
+                }, 600);
+            }, 700); // Slight pause before sliding out
         });
     }
 
@@ -21,18 +79,9 @@ document.addEventListener('DOMContentLoaded', () => {
             navLinks.classList.toggle('active');
             mobileBtn.innerHTML = navLinks.classList.contains('active') ? '✕' : '☰';
         });
-        
-        // Close menu when clicking a link
-        navLinks.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => {
-                navLinks.classList.remove('active');
-                mobileBtn.innerHTML = '☰';
-            });
-        });
     }
 
-    // Intersection Observer
-    const observerOptions = { threshold: 0.1, rootMargin: "0px 0px -40px 0px" };
+    // Intersection Observer (Fade Up)
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -40,64 +89,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 observer.unobserve(entry.target);
             }
         });
-    }, observerOptions);
+    }, { threshold: 0.1, rootMargin: "0px 0px -40px 0px" });
     
     document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
-
-    // Apple-Style 3D Scroll Reveal logic (Only run on desktop)
-    const scrollTrack = document.getElementById('scrollHeroTrack');
-    const stage = document.getElementById('revealStage');
-    const cards = document.querySelectorAll('.reveal-card');
-    const dots = document.querySelectorAll('.dot');
-
-    function updateScrollReveal() {
-        if (!scrollTrack || !stage || window.innerWidth <= 992) return;
-
-        const rect = scrollTrack.getBoundingClientRect();
-        const totalScroll = scrollTrack.offsetHeight - window.innerHeight;
-        if (totalScroll <= 0) return;
-
-        const progress = Math.min(Math.max(-rect.top / totalScroll, 0), 1);
-
-        const rotateX = (1 - progress) * 50; 
-        const translateY = (1 - progress) * 100;
-        const scale = 0.65 + (progress * 0.35);
-        const opacity = Math.min(progress * 3.5, 1);
-        const blur = (1 - progress) * 12;
-
-        stage.style.transform = `rotateX(${rotateX}deg) translateY(${translateY}px) scale(${scale})`;
-        stage.style.opacity = opacity;
-        stage.style.filter = `blur(${blur}px)`;
-
-        let activeIdx = -1;
-        if (progress > 0.65) {
-            activeIdx = 2;
-        } else if (progress > 0.35) {
-            activeIdx = 1;
-        } else if (progress > 0.08) {
-            activeIdx = 0;
-        }
-
-        cards.forEach((card, idx) => {
-            if (idx === activeIdx && progress > 0.05) {
-                card.classList.add('active');
-            } else {
-                card.classList.remove('active');
-            }
-        });
-
-        dots.forEach((dot, idx) => {
-            if (idx === activeIdx && progress > 0.05) {
-                dot.classList.add('active');
-            } else {
-                dot.classList.remove('active');
-            }
-        });
-    }
-
-    if (scrollTrack && stage) {
-        window.addEventListener('scroll', updateScrollReveal);
-        window.addEventListener('resize', updateScrollReveal);
-        updateScrollReveal();
-    }
 });
