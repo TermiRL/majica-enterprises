@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Startseite | Majica</title>
+    <title>Majica Enterprises</title>
     <link rel="icon" type="image/png" href="assets/favicon.png">
-    <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
@@ -13,68 +12,58 @@
     
     <nav>
         <div class="nav-container">
-            <a href="index.html" class="logo">
-
-                <img src="assets/logo-white.png" alt="Logo" class="logo-icon logo-for-dark-theme">
-                <img src="assets/logo-black.png" alt="Logo" class="logo-icon logo-for-light-theme">
-    
+            <a href="#" class="logo">
+                <img src="assets/logo-white.png" alt="Logo" class="logo-icon logo-for-dark-theme" onerror="this.style.display='none'">
+                <img src="assets/logo-black.png" alt="Logo" class="logo-icon logo-for-light-theme" onerror="this.style.display='none'">
                 Majica
             </a>
             
-            <button class="mobile-menu-btn" id="mobile-menu-btn">☰</button>
-            <div class="nav-links" id="nav-links">
-                <a href="ueber-uns/index.html">Über uns</a>
-                <a href="geschaeftsbereiche/index.html">Geschäfte</a>
-                <a href="kontakt/index.html">Kontakt</a>
+            <div class="nav-right">
+                <div class="nav-links" id="nav-links">
+                    <a href="#">Über uns</a>
+                    <a href="#" class="active">Geschäftsbereiche</a>
+                    <a href="#">Kontakt</a>
+                </div>
+                <button id="theme-toggle" title="Designmodus">◐</button>
+                <button class="mobile-menu-btn" id="mobile-menu-btn">☰</button>
             </div>
-            
-            <!-- Fixed top right button -->
-            <button id="theme-toggle" title="Designmodus" aria-label="Theme umschalten">◐</button>
         </div>
     </nav>
 
-    <main style="padding-top: 80px;">
-
-    <section class="section">
-        <div class="container fade-up">
-            <div class="text-center" style="max-width: 760px; margin: 0 auto 4rem;">
-                <div class="section-tag">// STUDIO 2026</div>
-                <h2>Gestaltung. Technik. Substanz.</h2>
+    <main style="padding-top: 120px;">
+        <section class="section">
+            <div class="container fade-up">
+                <div class="text-center" style="max-width: 760px; margin: 0 auto 4rem;">
+                    <div class="section-tag">// CORE DIVISIONS</div>
+                    <h2>Unsere Geschäftsbereiche</h2>
+                    <p style="color: var(--text-muted);">Drei spezialisierte Sparten, vereint unter dem Dach von Majica Enterprises.</p>
+                </div>
+                <div class="grid">
+                    <div class="card">
+                        <div class="section-tag">DIVISION 01</div>
+                        <h3>MAJICA Design</h3>
+                        <p>Visuelle Identitäten, Markenstrategie, Typografie und Art Direction.</p>
+                        <a href="#" class="btn btn-secondary" style="margin-top: 1.5rem;">Anfrage senden</a>
+                    </div>
+                    <div class="card">
+                        <div class="section-tag">DIVISION 02</div>
+                        <h3>MAJICA Development</h3>
+                        <p>Web-Anwendungen, Cloud-Systeme, Schnittstellen und Prozess-Automatisierung.</p>
+                        <a href="#" class="btn btn-secondary" style="margin-top: 1.5rem;">Anfrage senden</a>
+                    </div>
+                    <div class="card">
+                        <div class="section-tag">DIVISION 03</div>
+                        <h3>MAJICA Maison</h3>
+                        <p>Atelier, Mode-Kollektionen und hochwertige physische Accessoires.</p>
+                        <a href="#" class="btn btn-secondary" style="margin-top: 1.5rem;">Anfrage senden</a>
+                    </div>
+                </div>
             </div>
-            <div class="grid">
-                <div class="card">
-                    <div class="section-tag">01 // CREATIVE</div>
-                    <h3>MAJICA Design</h3>
-                    <p>Visuelle Erscheinungsbilder, die Charakter zeigen. Wir entwickeln durchdachte Brandings.</p>
-                    <a href="#" class="btn btn-secondary" style="margin-top: 1.5rem;">Erkunden</a>
-                </div>
-                <div class="card">
-                    <div class="section-tag">02 // TECH</div>
-                    <h3>MAJICA Development</h3>
-                    <p>Moderne Softwareentwicklung ohne Kompromisse. Maßgeschneiderte Webanwendungen.</p>
-                    <a href="#" class="btn btn-secondary" style="margin-top: 1.5rem;">Erkunden</a>
-                </div>
-                <div class="card">
-                    <div class="section-tag">03 // CRAFT</div>
-                    <h3>MAJICA Maison</h3>
-                    <p>Physische Produkte mit nachhaltigem Anforderungsprofil. Ausgewählte Materialien.</p>
-                    <a href="#" class="btn btn-secondary" style="margin-top: 1.5rem;">Erkunden</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
+        </section>
     </main>
 
-    <footer>
-        <div class="container">
-            <p style="color: var(--text-muted); font-size: 0.85rem;">© 2026 Majica Enterprises.</p>
-        </div>
-    </footer>
-
-    <!-- Cookie Badge -->
     <div id="cookie-badge" class="cookie-badge">
-        <p>Wir speichern deine Theme-Einstellung (Dark/Light Mode) im lokalen Speicher deines Browsers, damit du nicht bei jedem Besuch umschalten musst.</p>
+        <p>Wir speichern deine Theme-Einstellung lokal, damit du nicht bei jedem Besuch umschalten musst.</p>
         <div class="cookie-btns">
             <button id="cookie-accept" class="btn btn-primary btn-sm">Erlauben</button>
             <button id="cookie-decline" class="btn btn-secondary btn-sm">Ablehnen</button>
