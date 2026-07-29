@@ -63,13 +63,22 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Mobile Menü Toggle
+    // Mobile Menü Toggle (Zuverlässig für alle Geräte)
     const mobileBtn = document.getElementById('mobile-menu-btn');
     const navLinks = document.getElementById('nav-links');
+    
     if (mobileBtn && navLinks) {
         mobileBtn.addEventListener('click', () => {
             navLinks.classList.toggle('active');
             mobileBtn.innerHTML = navLinks.classList.contains('active') ? '✕' : '☰';
+        });
+
+        // Schließe Menü bei Klick auf einen Link
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                mobileBtn.innerHTML = '☰';
+            });
         });
     }
 
