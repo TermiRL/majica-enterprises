@@ -64,8 +64,8 @@ nav {
   max-width: 1280px; margin: 0 auto; padding: 1rem 2rem;
   display: flex; justify-content: space-between; align-items: center; 
 }
-.logo { font-family: 'Space Grotesk', sans-serif; font-size: 1.25rem; font-weight: 700; text-decoration: none; color: var(--text-main); display: flex; align-items: center; gap: 0.85rem; z-index: 1001; }
-.logo-icon { height: 36px; width: auto; }
+.logo { font-family: 'Space Grotesk', sans-serif; font-size: 1.15rem; font-weight: 700; text-decoration: none; color: var(--text-main); display: flex; align-items: center; gap: 0.85rem; z-index: 1001; }
+.logo-icon { height: 34px; width: auto; }
 
 [data-theme="dark"] .logo-for-light-theme { display: none !important; }
 [data-theme="dark"] .logo-for-dark-theme { display: inline-block !important; }
@@ -114,11 +114,11 @@ nav {
 .btn-secondary:hover { transform: translateY(-4px); border-color: var(--card-border-hover); box-shadow: var(--shadow-sm); }
 .btn-sm { padding: 0.6rem 1.2rem; font-size: 0.9rem; min-height: 40px; }
 
-/* Cookie Badge Fix */
+/* Cookie Badge */
 .cookie-badge {
   position: fixed; 
   bottom: 2rem; 
-  right: -100%; /* Startet unsichtbar rechts */
+  right: -100%;
   background: var(--bg-sec); 
   border: 1px solid var(--card-border-hover);
   padding: 1.5rem; 
@@ -138,7 +138,7 @@ nav {
 .cookie-btns { display: flex; gap: 0.8rem; width: 100%; }
 .cookie-btns .btn { flex: 1; padding: 0.5rem; min-height: 40px; }
 
-/* Liquid "Splatoon" Effekt */
+/* Liquid Splatoon Animation */
 .liquid-overlay {
   position: fixed;
   top: 0; left: 0; width: 100vw; height: 100vh;
