@@ -74,7 +74,7 @@ nav {
 
 .nav-right { display: flex; align-items: center; gap: 2rem; }
 .nav-links { display: flex; gap: 2rem; align-items: center; }
-.nav-links a { text-decoration: none; color: var(--text-muted); font-size: 0.95rem; font-weight: 500; transition: color var(--transition); }
+.nav-links a { text-decoration: none; color: var(--text-muted); font-size: 0.95rem; font-weight: 500; transition: color var(--transition); cursor: pointer; }
 .nav-links a:hover, .nav-links a.active { color: var(--text-main); }
 
 #theme-toggle {
@@ -153,12 +153,12 @@ nav {
   .mobile-menu-btn { display: flex; }
   .nav-links {
     position: fixed; top: 0; right: -100%; width: 100%; height: 100vh;
-    background: var(--nav-bg); flex-direction: column; justify-content: center;
+    background: var(--nav-bg); flex-direction: column; justify-content: center; align-items: center;
     backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
-    transition: right 0.4s cubic-bezier(0.16, 1, 0.3, 1); padding: 2rem; z-index: -1;
+    transition: right 0.4s cubic-bezier(0.16, 1, 0.3, 1); padding: 2rem; z-index: 999;
   }
   .nav-links.active { right: 0; }
-  .nav-links a { font-size: 1.5rem; margin: 0.5rem 0; }
+  .nav-links a { font-size: 1.5rem; margin: 1rem 0; }
   .cookie-badge { bottom: 1rem; max-width: calc(100% - 2rem); }
   .cookie-badge.show { right: 1rem; }
 }
