@@ -14,16 +14,16 @@ document.addEventListener('DOMContentLoaded', () => {
     if (btnAccept && btnDecline) {
         btnAccept.addEventListener('click', () => {
             localStorage.setItem('cookieConsent', 'true');
-            cookieBadge.classList.remove('show');
+            if (cookieBadge) cookieBadge.classList.remove('show');
         });
         btnDecline.addEventListener('click', () => {
             localStorage.setItem('cookieConsent', 'false');
             localStorage.removeItem('theme'); 
-            cookieBadge.classList.remove('show');
+            if (cookieBadge) cookieBadge.classList.remove('show');
         });
     }
 
-    // Liquid Theme Transition (Splatoon Effekt)
+    // Liquid Theme Transition (Splatoon-Effekt vom Button aus)
     const themeToggle = document.getElementById('theme-toggle');
     
     let savedTheme = 'dark'; 
@@ -37,12 +37,10 @@ document.addEventListener('DOMContentLoaded', () => {
             const currentTheme = document.documentElement.getAttribute('data-theme');
             const newTheme = currentTheme === 'light' ? 'dark' : 'light';
             
-            // Overlay erstellen
             const overlay = document.createElement('div');
             overlay.className = 'liquid-overlay';
             overlay.style.backgroundColor = newTheme === 'light' ? '#FAFAFC' : '#0A0A0C';
             
-            // Position des Buttons berechnen, damit die Farbe genau von dort startet
             const rect = themeToggle.getBoundingClientRect();
             const originX = rect.left + rect.width / 2;
             const originY = rect.top + rect.height / 2;
@@ -50,26 +48,22 @@ document.addEventListener('DOMContentLoaded', () => {
             overlay.style.clipPath = `circle(0px at ${originX}px ${originY}px)`;
             document.body.appendChild(overlay);
             
-            // Reflow erzwingen
             void overlay.offsetWidth;
             
-            // Farbe über den ganzen Bildschirm ausbreiten
             overlay.style.clipPath = `circle(150vw at ${originX}px ${originY}px)`;
 
-            // Kurz warten, bis die Animation fertig ist, dann echtes Theme wechseln
             setTimeout(() => {
                 document.documentElement.setAttribute('data-theme', newTheme);
                 if (localStorage.getItem('cookieConsent') === 'true') {
                     localStorage.setItem('theme', newTheme);
                 }
                 
-                // Overlay aufräumen
                 setTimeout(() => { overlay.remove(); }, 50);
             }, 800); 
         });
     }
 
-    // Mobile Menü
+    // Mobile Menü Toggle
     const mobileBtn = document.getElementById('mobile-menu-btn');
     const navLinks = document.getElementById('nav-links');
     if (mobileBtn && navLinks) {
@@ -79,7 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Fade-Up Animationen
+    // Fade-Up Animationen beim Scrollen
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
