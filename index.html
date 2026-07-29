@@ -12,7 +12,7 @@
     
     <nav>
         <div class="nav-container">
-            <a href="#" class="logo">
+            <a href="index.html" class="logo">
                 <img src="assets/logo-white.png" alt="Logo" class="logo-icon logo-for-dark-theme" onerror="this.style.display='none'">
                 <img src="assets/logo-black.png" alt="Logo" class="logo-icon logo-for-light-theme" onerror="this.style.display='none'">
                 Majica Enterprises
@@ -20,9 +20,9 @@
             
             <div class="nav-right">
                 <div class="nav-links" id="nav-links">
-                    <a href="#">Über uns</a>
-                    <a href="#" class="active">Geschäftsbereiche</a>
-                    <a href="#">Kontakt</a>
+                    <a href="index.html#about">Über uns</a>
+                    <a href="index.html" class="active">Geschäftsbereiche</a>
+                    <a href="index.html#contact">Kontakt</a>
                 </div>
                 <button id="theme-toggle" title="Designmodus" aria-label="Designmodus umschalten">◐</button>
                 <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Menü öffnen">☰</button>
@@ -31,7 +31,7 @@
     </nav>
 
     <main style="padding-top: 120px;">
-        <section class="section">
+        <section class="section" id="divisions">
             <div class="container fade-up">
                 <div class="text-center" style="max-width: 760px; margin: 0 auto 4rem;">
                     <div class="section-tag">// CORE DIVISIONS</div>
@@ -43,26 +43,26 @@
                         <div class="section-tag">DIVISION 01</div>
                         <h3>MAJICA Design</h3>
                         <p>Visuelle Identitäten, Markenstrategie, Typografie und Art Direction.</p>
-                        <a href="#" class="btn btn-secondary" style="margin-top: 1.5rem;">Anfrage senden</a>
+                        <button class="btn btn-secondary" style="margin-top: 1.5rem;" onclick="alert('MAJICA Design ausgewählt')">Anfrage senden</button>
                     </div>
                     <div class="card">
                         <div class="section-tag">DIVISION 02</div>
                         <h3>MAJICA Development</h3>
                         <p>Web-Anwendungen, Cloud-Systeme, Schnittstellen und Prozess-Automatisierung.</p>
-                        <a href="#" class="btn btn-secondary" style="margin-top: 1.5rem;">Anfrage senden</a>
+                        <button class="btn btn-secondary" style="margin-top: 1.5rem;" onclick="alert('MAJICA Development ausgewählt')">Anfrage senden</button>
                     </div>
                     <div class="card">
                         <div class="section-tag">DIVISION 03</div>
                         <h3>MAJICA Maison</h3>
                         <p>Atelier, Mode-Kollektionen und hochwertige physische Accessoires.</p>
-                        <a href="#" class="btn btn-secondary" style="margin-top: 1.5rem;">Anfrage senden</a>
+                        <button class="btn btn-secondary" style="margin-top: 1.5rem;" onclick="alert('MAJICA Maison ausgewählt')">Anfrage senden</button>
                     </div>
                 </div>
             </div>
         </section>
     </main>
 
-    <footer>
+    <footer id="contact">
         <div class="container">
             <p style="color: var(--text-muted); font-size: 0.85rem;">© 2026 Majica Enterprises. Alle Rechte vorbehalten.</p>
         </div>
