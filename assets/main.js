@@ -1,14 +1,14 @@
 document.addEventListener('DOMContentLoaded', () => {
     
-    // Cookie Badge Logic
+    // Cookie Badge Logik
     const cookieBadge = document.getElementById('cookie-badge');
     const btnAccept = document.getElementById('cookie-accept');
     const btnDecline = document.getElementById('cookie-decline');
     
     let hasConsent = localStorage.getItem('cookieConsent');
     
-    if (!hasConsent) {
-        setTimeout(() => { cookieBadge.classList.add('show'); }, 1500);
+    if (!hasConsent && cookieBadge) {
+        setTimeout(() => { cookieBadge.classList.add('show'); }, 1000);
     }
 
     if (btnAccept && btnDecline) {
@@ -18,16 +18,15 @@ document.addEventListener('DOMContentLoaded', () => {
         });
         btnDecline.addEventListener('click', () => {
             localStorage.setItem('cookieConsent', 'false');
-            localStorage.removeItem('theme'); // Clean up if declined
+            localStorage.removeItem('theme'); 
             cookieBadge.classList.remove('show');
         });
     }
 
-    // Theme Toggle & Paint Bucket Logic
+    // Liquid Theme Transition (Splatoon Effekt)
     const themeToggle = document.getElementById('theme-toggle');
     
-    // Initial Theme Load
-    let savedTheme = 'dark'; // Default
+    let savedTheme = 'dark'; 
     if (hasConsent === 'true') {
         savedTheme = localStorage.getItem('theme') || 'dark';
     }
@@ -38,40 +37,39 @@ document.addEventListener('DOMContentLoaded', () => {
             const currentTheme = document.documentElement.getAttribute('data-theme');
             const newTheme = currentTheme === 'light' ? 'dark' : 'light';
             
-            // Create Paint Bucket Overlay
+            // Overlay erstellen
             const overlay = document.createElement('div');
-            overlay.className = 'theme-overlay';
-            // Set color of the "paint" to the background of the incoming theme
+            overlay.className = 'liquid-overlay';
             overlay.style.backgroundColor = newTheme === 'light' ? '#FAFAFC' : '#0A0A0C';
+            
+            // Position des Buttons berechnen, damit die Farbe genau von dort startet
+            const rect = themeToggle.getBoundingClientRect();
+            const originX = rect.left + rect.width / 2;
+            const originY = rect.top + rect.height / 2;
+            
+            overlay.style.clipPath = `circle(0px at ${originX}px ${originY}px)`;
             document.body.appendChild(overlay);
             
-            // Trigger drop animation
-            requestAnimationFrame(() => {
-                overlay.classList.add('drop');
-            });
+            // Reflow erzwingen
+            void overlay.offsetWidth;
+            
+            // Farbe über den ganzen Bildschirm ausbreiten
+            overlay.style.clipPath = `circle(150vw at ${originX}px ${originY}px)`;
 
-            // Mid-animation (when screen is covered), switch the actual DOM theme instantly
+            // Kurz warten, bis die Animation fertig ist, dann echtes Theme wechseln
             setTimeout(() => {
                 document.documentElement.setAttribute('data-theme', newTheme);
                 if (localStorage.getItem('cookieConsent') === 'true') {
                     localStorage.setItem('theme', newTheme);
                 }
-            }, 600); // Corresponds to transition duration in CSS
-
-            // Slide out the overlay downwards
-            setTimeout(() => {
-                overlay.classList.remove('drop');
-                overlay.classList.add('slide-out');
                 
-                // Cleanup DOM
-                setTimeout(() => {
-                    overlay.remove();
-                }, 600);
-            }, 700); // Slight pause before sliding out
+                // Overlay aufräumen
+                setTimeout(() => { overlay.remove(); }, 50);
+            }, 800); 
         });
     }
 
-    // Mobile Menu Toggle
+    // Mobile Menü
     const mobileBtn = document.getElementById('mobile-menu-btn');
     const navLinks = document.getElementById('nav-links');
     if (mobileBtn && navLinks) {
@@ -81,7 +79,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Intersection Observer (Fade Up)
+    // Fade-Up Animationen
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
