@@ -300,34 +300,61 @@
     }
   }
 
-   /* ---------------- Contact form ---------------- */
-  /* Live delivery via Web3Forms: submits the form data via fetch to
-     Web3Forms' API, which forwards it to business@majica-enterprises.com. */
+  /* ---------------- Contact form ---------------- */
   var form = document.getElementById('contact-form');
+  var result = document.getElementById('result');
+
   if (form) {
     form.addEventListener('submit', function (e) {
       e.preventDefault();
-      var name = form.querySelector('#name');
-      var success = document.querySelector('.form-success');
-      var successName = document.querySelector('[data-success-name]');
-      fetch(form.action, {
+
+      var captcha = form.querySelector('textarea[name="h-captcha-response"]');
+
+      if (!captcha || !captcha.value.trim()) {
+        if (result) {
+          result.textContent = 'Bitte bestätigen Sie das hCaptcha.';
+        } else {
+          alert('Bitte bestätigen Sie das hCaptcha.');
+        }
+        return;
+      }
+
+      var formData = new FormData(form);
+
+      if (result) {
+        result.textContent = 'Bitte warten...';
+      }
+
+      fetch('https://api.web3forms.com/submit', {
         method: 'POST',
-        body: new FormData(form),
-        headers: { 'Accept': 'application/json' }
+        body: formData,
+        headers: {
+          'Accept': 'application/json'
+        }
       })
-        .then(function (r) { return r.json(); })
+        .then(function (response) {
+          return response.json();
+        })
         .then(function (data) {
           if (data.success) {
-            if (successName && name) successName.textContent = name.value.trim();
-            form.style.display = 'none';
-            if (success) success.style.display = 'block';
+            if (result) {
+              result.textContent = 'Nachricht erfolgreich gesendet.';
+            }
+            form.reset();
           } else {
-            alert('Fehler beim Senden. Bitte versuche es erneut.');
+            if (result) {
+              result.textContent = data.message || 'Fehler beim Senden. Bitte versuchen Sie es erneut.';
+            } else {
+              alert(data.message || 'Fehler beim Senden. Bitte versuchen Sie es erneut.');
+            }
           }
         })
         .catch(function () {
-          alert('Fehler beim Senden. Bitte versuche es erneut.');
+          if (result) {
+            result.textContent = 'Fehler beim Senden. Bitte versuchen Sie es erneut.';
+          } else {
+            alert('Fehler beim Senden. Bitte versuchen Sie es erneut.');
+          }
         });
     });
   }
-})();
