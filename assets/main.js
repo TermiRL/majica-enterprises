@@ -300,11 +300,9 @@
     }
   }
 
-  /* ---------------- Contact form ---------------- */
-  /* Static delivery: no backend is wired up yet. Confirms client-side and
-     keeps the entered message so it can be copied or sent manually.
-     To go live, point this form at a form backend (e.g. own API, Formspree)
-     and submit normally instead of preventDefault(). */
+   /* ---------------- Contact form ---------------- */
+  /* Live delivery via Web3Forms: submits the form data via fetch to
+     Web3Forms' API, which forwards it to business@majica-enterprises.com. */
   var form = document.getElementById('contact-form');
   if (form) {
     form.addEventListener('submit', function (e) {
@@ -312,9 +310,24 @@
       var name = form.querySelector('#name');
       var success = document.querySelector('.form-success');
       var successName = document.querySelector('[data-success-name]');
-      if (successName && name) successName.textContent = name.value.trim();
-      form.style.display = 'none';
-      if (success) success.style.display = 'block';
+      fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' }
+      })
+        .then(function (r) { return r.json(); })
+        .then(function (data) {
+          if (data.success) {
+            if (successName && name) successName.textContent = name.value.trim();
+            form.style.display = 'none';
+            if (success) success.style.display = 'block';
+          } else {
+            alert('Fehler beim Senden. Bitte versuche es erneut.');
+          }
+        })
+        .catch(function () {
+          alert('Fehler beim Senden. Bitte versuche es erneut.');
+        });
     });
   }
 })();
