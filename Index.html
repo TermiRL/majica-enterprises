@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MAJICA — Premium Design, Engineering & Maison</title>
+  
+  <!-- Favicons aus dem Original-Verzeichnis -->
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+
+  <style>
+    /* ==========================================================
+       MAJICA ENTERPRISES — DARK EDITORIAL LUXURY
+       ========================================================== */
+    :root {
+      --primary: #272F7A;
+      --accent: #95C1E6;
+      --bg: #050507; 
+      --bg-elevated: #0a0a0e;
+      --text-main: #f0f0f0;
+      --text-muted: #888890;
+      --line-color: rgba(149, 193, 230, 0.15);
+      --ease-lux: cubic-bezier(0.25, 1, 0.5, 1);
+      
+      /* Mapping für den Logo Creator */
+      --dark-bg: var(--bg);
+      --white: var(--text-main);
+      --radius-lg: 24px;
+      --radius-md: 12px;
+      --transition: all 0.3s ease;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: "Helvetica Neue", Helvetica, -apple-system, sans-serif;
+      background-color: var(--bg);
+      color: var(--text-main);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      cursor: none; 
+    }
+
+    ::selection { background: var(--primary); color: var(--accent); }
+
+    /* --- Custom Lux Cursor --- */
+    .cursor-dot {
+      position: fixed; top: 0; left: 0; width: 4px; height: 4px;
+      background-color: var(--accent); border-radius: 50%;
+      pointer-events: none; z-index: 10000; transform: translate(-50%, -50%);
+    }
+    .cursor-ring {
+      position: fixed; top: 0; left: 0; width: 40px; height: 40px;
+      border: 1px solid rgba(149, 193, 230, 0.4); border-radius: 50%;
+      pointer-events: none; z-index: 9999; transform: translate(-50%, -50%);
+      transition: width 0.4s var(--ease-lux), height 0.4s var(--ease-lux), background-color 0.4s;
+    }
+    @media (max-width: 768px) {
+      body { cursor: auto; }
+      .cursor-dot, .cursor-ring { display: none; }
+    }
+
+    .container { max-width: 1400px; margin: 0 auto; padding: 0 40px; }
+
+    /* --- Editorial Navigation --- */
+    .navbar {
+      position: fixed; top: 0; width: 100%; background: rgba(5, 5, 7, 0.8);
+      backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
+      border-bottom: 1px solid var(--line-color); z-index: 1000; padding: 20px 0;
+      text-transform: uppercase; letter-spacing: 2px; font-size: 0.8rem;
+    }
+    .nav-inner { display: flex; justify-content: space-between; align-items: center; }
+    .logo {
+      color: var(--text-main); text-decoration: none;
+      display: flex; align-items: center; gap: 15px; font-weight: 300;
+    }
+    .logo-image { height: 30px; width: auto; object-fit: contain; }
+    .nav-links { display: flex; gap: 40px; list-style: none; }
+    .nav-links a {
+      text-decoration: none; color: var(--text-muted);
+      transition: color 0.4s ease; position: relative;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--accent); }
+    
+    .hamburger { display: none; flex-direction: column; gap: 6px; background: none; border: none; cursor: pointer; z-index: 1100; }
+    .hamburger span { width: 26px; height: 1px; background: var(--text-main); transition: 0.4s; }
+    
+    @media (max-width: 868px) {
+      .container { padding: 0 20px; }
+      .nav-links {
+        position: fixed; top: 0; right: -100%; width: 100%; height: 100vh;
+        background: var(--bg); flex-direction: column; align-items: center; justify-content: center;
+        transition: right 0.6s var(--ease-lux); font-size: 1.2rem; gap: 40px;
+      }
+      .nav-links.open { right: 0; }
+      .hamburger { display: flex; }
+      .hamburger.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+      .hamburger.active span:nth-child(2) { opacity: 0; }
+      .hamburger.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    }
+
+    /* --- Router & Page Views --- */
+    main { padding-top: 100px; min-height: 85vh; }
+    .page-view { display: none; opacity: 0; animation: fadeUp 1s var(--ease-lux) forwards; }
+    .page-view.active { display: block; }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* --- High-End Typography --- */
+    h1 { font-size: clamp(3rem, 8vw, 7rem); font-weight: 200; letter-spacing: -0.03em; line-height: 1; margin-bottom: 30px; color: var(--text-main); }
+    h1 strong { font-weight: 600; color: var(--accent); }
+    h2 { font-size: clamp(2rem, 4vw, 3.5rem); font-weight: 300; letter-spacing: -0.02em; margin-bottom: 20px; color: var(--text-main); }
+    p { font-size: 1.1rem; line-height: 1.8; font-weight: 300; margin-bottom: 40px; color: var(--text-muted); max-width: 700px; }
+    .subtitle { text-transform: uppercase; letter-spacing: 4px; font-size: 0.8rem; color: var(--accent); margin-bottom: 20px; display: block; }
+
+    /* --- Editorial Buttons --- */
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      padding: 16px 40px; border: 1px solid var(--line-color); background: transparent;
+      color: var(--text-main); font-weight: 400; text-transform: uppercase; letter-spacing: 2px;
+      font-size: 0.85rem; text-decoration: none; cursor: pointer;
+      transition: all 0.5s var(--ease-lux); overflow: hidden; position: relative;
+    }
+    .btn::before {
+      content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+      background: var(--accent); transform: scaleX(0); transform-origin: right;
+      transition: transform 0.5s var(--ease-lux); z-index: -1;
+    }
+    .btn:hover { color: var(--bg); border-color: var(--accent); }
+    .btn:hover::before { transform: scaleX(1); transform-origin: left; }
+    .btn-solid { background: var(--primary); border-color: var(--primary); color: white; }
+    .btn-solid:hover { background: transparent; color: var(--primary); }
+
+    /* --- Hero Section --- */
+    .hero { min-height: 70vh; display: flex; flex-direction: column; justify-content: center; padding: 100px 0 60px; position: relative; }
+    .hero-glow {
+      position: absolute; top: 20%; right: 10%; width: 50vw; height: 50vw;
+      background: radial-gradient(circle, rgba(39, 47, 122, 0.4) 0%, rgba(5,5,7,0) 70%);
+      z-index: -1; pointer-events: none; filter: blur(60px);
+    }
+
+    /* --- Editorial Exhibition List --- */
+    .exhibition-list { border-top: 1px solid var(--line-color); margin: 80px 0; }
+    .exhibition-item {
+      display: grid; grid-template-columns: 100px 1fr 2fr; gap: 40px;
+      padding: 60px 0; border-bottom: 1px solid var(--line-color);
+      text-decoration: none; color: inherit; transition: all 0.5s var(--ease-lux);
+      position: relative; overflow: hidden;
+    }
+    .exhibition-item::before {
+      content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+      background: linear-gradient(to right, transparent, rgba(149, 193, 230, 0.03), transparent);
+      transform: translateX(-100%); transition: transform 0.8s var(--ease-lux); z-index: -1;
+    }
+    .exhibition-item:hover::before { transform: translateX(100%); }
+    .exhibition-item:hover .item-title { color: var(--accent); transform: translateX(10px); }
+    .item-num { font-size: 1rem; color: var(--text-muted); font-weight: 300; }
+    .item-title { font-size: 2.5rem; font-weight: 300; letter-spacing: -0.02em; transition: all 0.5s var(--ease-lux); }
+    .item-desc { font-size: 1.1rem; color: var(--text-muted); line-height: 1.6; font-weight: 300; margin: 0; }
+
+    @media (max-width: 900px) { .exhibition-item { grid-template-columns: 1fr; gap: 15px; padding: 40px 0; } }
+
+    /* ==========================================================================
+       LOGO CREATOR (Glassmorphism & Dark Mode)
+       ========================================================================== */
+    .creator-section {
+        background-color: var(--dark-bg);
+        color: var(--white);
+        position: relative;
+        overflow: hidden;
+        margin: 100px 0;
+        border-top: 1px solid var(--line-color);
+        border-bottom: 1px solid var(--line-color);
+    }
+    .creator-section::before {
+        content: ''; position: absolute; top: -20%; right: -10%; width: 50%; height: 50%;
+        background: var(--accent); filter: blur(150px); opacity: 0.15; border-radius: 50%; pointer-events: none;
+    }
+    .glass-panel {
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border-radius: var(--radius-lg);
+        padding: 2rem;
+        margin: 4rem 0;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 3rem;
+    }
+    @media(min-width: 992px) {
+        .glass-panel { padding: 4rem; grid-template-columns: 1fr 1fr; align-items: center; }
+    }
+    .input-group { margin-bottom: 1.5rem; }
+    .input-group label {
+        display: block; font-size: 0.75rem; text-transform: uppercase;
+        letter-spacing: 0.05em; color: rgba(255,255,255,0.5); margin-bottom: 0.5rem; font-weight: 700;
+    }
+    input[type="text"].creator-input {
+        width: 100%; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1);
+        color: white; padding: 1rem; border-radius: var(--radius-md);
+        font-size: 1rem; font-family: inherit; font-weight: 700;
+        outline: none; transition: var(--transition);
+    }
+    input[type="text"].creator-input:focus { border-color: var(--accent); }
+
+    .toggle-group {
+        display: flex; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1);
+        border-radius: var(--radius-md); padding: 4px;
+    }
+    .toggle-btn {
+        flex: 1; background: transparent; border: none; color: rgba(255,255,255,0.5);
+        padding: 10px; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 0.9rem; transition: var(--transition);
+    }
+    .toggle-btn.active { background: rgba(255,255,255,0.1); color: white; }
+
+    .bg-selectors { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+    .color-btn {
+        width: 40px; height: 40px; border-radius: 50%; border: 2px solid transparent;
+        cursor: pointer; transition: var(--transition);
+    }
+    .color-btn.active { border-color: var(--white); transform: scale(1.1); }
+    .grad-0 { background: linear-gradient(135deg, #95C1E6, #272F7A); }
+    .grad-1 { background: linear-gradient(135deg, #1e293b, #000000); }
+    .grad-2 { background: linear-gradient(135deg, #ff7e5f, #feb47b); }
+    .grad-3 { background: linear-gradient(135deg, #00C9FF, #92FE9D); }
+    .grad-4 { background: linear-gradient(135deg, #8E2DE2, #4A00E0); }
+    
+    .upload-btn {
+        width: 40px; height: 40px; border-radius: 50%; background: rgba(255,255,255,0.1);
+        display: flex; justify-content: center; align-items: center; cursor: pointer; border: 1px dashed rgba(255,255,255,0.3);
+    }
+    .upload-btn:hover { background: rgba(255,255,255,0.2); }
+    .upload-btn input { display: none; }
+
+    .sliders-container {
+        display: block; background: rgba(0,0,0,0.2); padding: 1.5rem; border-radius: var(--radius-md); margin-top: 1rem;
+    }
+    .slider-wrapper { margin-bottom: 1rem; }
+    .slider-wrapper:last-child { margin-bottom: 0; }
+    .slider-header { display: flex; justify-content: space-between; margin-bottom: 5px; font-size: 0.8rem; color: #aaa; }
+    
+    input[type="range"] { -webkit-appearance: none; width: 100%; background: transparent; }
+    input[type="range"]::-webkit-slider-thumb {
+        -webkit-appearance: none; height: 16px; width: 16px; border-radius: 50%;
+        background: var(--accent); cursor: pointer; margin-top: -6px;
+    }
+    input[type="range"]::-webkit-slider-runnable-track {
+        width: 100%; height: 4px; cursor: pointer; background: rgba(255,255,255,0.2); border-radius: 2px;
+    }
+
+    .canvas-container { display: flex; justify-content: center; align-items: center; }
+    .canvas-wrapper {
+        position: relative; width: 100%; max-width: 340px; aspect-ratio: 1 / 1;
+        border-radius: 2rem; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5); overflow: hidden;
+        /* Transparenz-Muster */
+        background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAMUlEQVQ4T2NkYNgfQEhD/4nEiMIMDAxEG8RII4rLgEEW4tWMWgBRJ6O2gIETxOgAAwBf4Q/h+GqNkwAAAABJRU5ErkJggg==');
+    }
+    canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+
+    /* --- Formulardesign für den Kontakt-Tab --- */
+    .form-box { margin: 60px 0; max-width: 800px; }
+    .form-input {
+      width: 100%; background: transparent; border: none; border-bottom: 1px solid var(--line-color);
+      color: var(--text-main); font-size: 1.2rem; font-family: inherit; padding: 20px 0; margin-bottom: 30px; outline: none;
+      transition: border-color 0.4s; font-weight: 300;
+    }
+    .form-input::placeholder { color: rgba(255,255,255,0.3); }
+    .form-input:focus { border-color: var(--accent); }
+
+    /* --- Footer --- */
+    footer {
+      border-top: 1px solid var(--line-color); padding: 60px 0; font-size: 0.8rem;
+      text-transform: uppercase; letter-spacing: 2px; color: var(--text-muted);
+      display: flex; justify-content: space-between; flex-wrap: wrap; gap: 20px;
+    }
+    footer a { color: var(--text-muted); text-decoration: none; transition: color 0.3s; }
+    footer a:hover { color: var(--accent); }
+  </style>
+</head>
+<body>
+
+  <!-- Premium Cursor -->
+  <div class="cursor-dot" id="cursor-dot"></div>
+  <div class="cursor-ring" id="cursor-ring"></div>
+
+  <!-- Navigation -->
+  <header class="navbar">
+    <div class="container nav-inner">
+      <a href="/" class="logo" data-route="/">
+        <img src="assets/logo-mark.png" alt="Majica Logo" class="logo-image">
+        <span>MAJICA</span>
+      </a>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="/ueber-uns/" data-route="/ueber-uns/">Maison</a></li>
+        <li><a href="/geschaeftsbereiche/" data-route="/geschaeftsbereiche/">Divisions</a></li>
+        <li><a href="/team/" data-route="/team/">Atelier</a></li>
+        <li><a href="/innovation/" data-route="/innovation/">Innovation</a></li>
+        <li><a href="/kontakt/" data-route="/kontakt/">Contact</a></li>
+      </ul>
+      <button class="hamburger" id="hamburger">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <!-- ==============================================
+         1. STARTSEITE (HOME)
+         ============================================== -->
+    <div id="view-home" class="page-view active">
+      <div class="container hero">
+        <div class="hero-glow"></div>
+        <span class="subtitle">Premium Design & Engineering</span>
+        <h1>Design. Engineering.<br><strong>Maison.</strong></h1>
+        <p>Wir definieren die Schnittstelle zwischen exklusiver Ästhetik, hochpräziser Technologie und physischer Beständigkeit. Majica Enterprises ist kein gewöhnliches Studio – wir sind Architekten für digitale und physische Premium-Marken.</p>
+        <div>
+          <a href="/geschaeftsbereiche/" class="btn" data-route="/geschaeftsbereiche/">Explore Divisions</a>
+        </div>
+      </div>
+
+      <!-- High-End Exhibition List -->
+      <div class="container">
+        <div class="exhibition-list">
+          <a href="/geschaeftsbereiche/" class="exhibition-item" data-route="/geschaeftsbereiche/">
+            <div class="item-num">01 / 03</div>
+            <h3 class="item-title">MAJICA Design</h3>
+            <p class="item-desc">Haltung sichtbar machen. Visuelle Identitäten, kompromisslose Typografie und ausdrucksstarkes Editorial Branding für Marken, die den Markt anführen.</p>
+          </a>
+          <a href="/geschaeftsbereiche/" class="exhibition-item" data-route="/geschaeftsbereiche/">
+            <div class="item-num">02 / 03</div>
+            <h3 class="item-title">MAJICA Development</h3>
+            <p class="item-desc">Technik, die trägt. Hochverfügbare Web-Systeme, performante Software-Architekturen und Code, der höchsten Ingenieursstandards entspricht.</p>
+          </a>
+          <a href="/geschaeftsbereiche/" class="exhibition-item" data-route="/geschaeftsbereiche/">
+            <div class="item-num">03 / 03</div>
+            <h3 class="item-title">MAJICA Maison</h3>
+            <p class="item-desc">Objekte für Beständigkeit. Kuratierte Mode, hochwertige Textilien und zeitlose Accessoires. Das physische Erlebnis unserer Gestaltungsphilosophie.</p>
+          </a>
+        </div>
+      </div>
+
+      <!-- MAJICA LOGO CREATOR (Glassmorphism Integration) -->
+      <section class="creator-section">
+        <div class="container">
+          <div class="glass-panel">
+            
+            <!-- Controls -->
+            <div>
+              <span class="subtitle">Digital Atelier</span>
+              <h2>Creator Engine</h2>
+              <p>Kreieren Sie Ihr visuelles Asset über unser interaktives Glassmorphism-Panel.</p>
+              
+              <div class="input-group">
+                <label>Text / Initialen</label>
+                <input type="text" class="creator-input" id="creator-text" maxlength="3" value="M">
+              </div>
+
+              <div class="input-group">
+                <label>Form (Shape)</label>
+                <div class="toggle-group">
+                  <button class="toggle-btn active" data-shape="square">Square</button>
+                  <button class="toggle-btn" data-shape="circle">Circle</button>
+                </div>
+              </div>
+
+              <div class="input-group">
+                <label>Hintergrund-Architektur</label>
+                <div class="bg-selectors">
+                  <div class="color-btn grad-0 active" data-grad="grad-0"></div>
+                  <div class="color-btn grad-1" data-grad="grad-1"></div>
+                  <div class="color-btn grad-2" data-grad="grad-2"></div>
+                  <div class="color-btn grad-3" data-grad="grad-3"></div>
+                  <div class="color-btn grad-4" data-grad="grad-4"></div>
+                  <label class="upload-btn">
+                    <span style="font-size:1.2rem;">+</span>
+                    <input type="file" id="creator-upload" accept="image/*">
+                  </label>
+                </div>
+              </div>
+
+              <div class="sliders-container active">
+                <div class="slider-wrapper">
+                  <div class="slider-header"><span>Text-Skalierung</span> <span id="val-scale">100%</span></div>
+                  <input type="range" id="creator-scale" min="50" max="250" value="100">
+                </div>
+                <div class="slider-wrapper">
+                  <div class="slider-header"><span>Rotation</span> <span id="val-rotate">0°</span></div>
+                  <input type="range" id="creator-rotate" min="-180" max="180" value="0">
+                </div>
+              </div>
+
+              <button class="btn btn-solid" id="creator-download" style="margin-top: 1.5rem; width: 100%;">Asset Exportieren (PNG)</button>
+            </div>
+
+            <!-- Live Canvas -->
+            <div class="canvas-container">
+              <div class="canvas-wrapper">
+                <canvas id="creator-canvas" width="800" height="800"></canvas>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- ==============================================
+         2. ÜBER UNS (MAISON)
+         ============================================== -->
+    <div id="view-ueber-uns" class="page-view">
+      <div class="container hero">
+        <span class="subtitle">Philosophie</span>
+        <h1>The <strong>Maison.</strong></h1>
+        <p>Hinter Majica Enterprises steht der Glaube, dass Exzellenz nicht skalierbar ist, sondern das Ergebnis von Hingabe, Präzision und handwerklichem Können. Wir arbeiten nicht an Projekten, wir erschaffen Artefakte – sei es in Code, Design oder Stoff.</p>
+      </div>
+    </div>
+
+    <!-- ==============================================
+         3. GESCHÄFTSBEREICHE (DIVISIONS)
+         ============================================== -->
+    <div id="view-geschaeftsbereiche" class="page-view">
+      <div class="container hero" style="min-height: auto; padding-bottom: 0;">
+        <span class="subtitle">Expertise</span>
+        <h1>Our <strong>Divisions.</strong></h1>
+      </div>
+      <div class="container">
+        <div class="exhibition-list">
+          <div class="exhibition-item">
+            <div class="item-num">01 / 03</div>
+            <h3 class="item-title">Design</h3>
+            <p class="item-desc">Visuelle Identitäten, die nicht nur gesehen, sondern gespürt werden. Wir nutzen den Kontrast zwischen tiefem Navy (#272F7A) und Ice Blue (#95C1E6), um Marken eine souveräne Aura zu verleihen.</p>
+          </div>
+          <div class="exhibition-item">
+            <div class="item-num">02 / 03</div>
+            <h3 class="item-title">Engineering</h3>
+            <p class="item-desc">Jede Animation, jeder Scroll, jede Datenbankabfrage ist auf Perfektion getrimmt. Wir schreiben Software wie andere Gedichte verfassen – sauber, strukturiert und zeitlos.</p>
+          </div>
+          <div class="exhibition-item">
+            <div class="item-num">03 / 03</div>
+            <h3 class="item-title">Maison</h3>
+            <p class="item-desc">Die Übertragung unserer digitalen Ästhetik in die reale Welt. Eine kuratierte Linie aus Fashion und Objekten, die höchste Materialqualität mit minimalistischem Design verbindet.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==============================================
+         4. TEAM (ATELIER)
+         ============================================== -->
+    <div id="view-team" class="page-view">
+      <div class="container hero">
+        <span class="subtitle">Kollektiv</span>
+        <h1>The <strong>Atelier.</strong></h1>
+        <p>Ein geschlossener Kreis aus Designern, Entwicklern und Strategen. Wir glauben an radikale Reduktion und daran, dass ein kleines, hochspezialisiertes Team Großkonzernen stets überlegen ist.</p>
+      </div>
+    </div>
+
+    <!-- ==============================================
+         5. INNOVATION
+         ============================================== -->
+    <div id="view-innovation" class="page-view">
+      <div class="container hero">
+        <span class="subtitle">Research</span>
+        <h1><strong>Innovation</strong> Lab.</h1>
+        <p>Unsere Experimentierfläche. Hier testen wir die Grenzen von generativer KI, WebGL und neuen Textiltechnologien, lange bevor sie zum Mainstream werden.</p>
+      </div>
+    </div>
+
+    <!-- ==============================================
+         6. KONTAKT (INKL. PROGRAMMIERUNG AUS URSPRUNG)
+         ============================================== -->
+    <div id="view-kontakt" class="page-view">
+      <div class="container hero" style="min-height: auto;">
+        <span class="subtitle">Initiation</span>
+        <h1><strong>Contact.</strong></h1>
+        <p>Treten Sie in den Dialog. Das Formular ist an das Backend-System gekoppelt, um Ihre Anfrage sicher an unser Atelier zu leiten.</p>
+      </div>
+      <div class="container">
+        <div class="form-box">
+          <!-- Backend Action: Hier wird auf den Standard-Mail/PHP-Service des Original-Indexes referenziert -->
+          <form action="send_mail.php" method="POST" class="contact-form" id="main-contact-form">
+            <input type="text" name="name" class="form-input" placeholder="Name / Organisation" required>
+            <input type="email" name="email" class="form-input" placeholder="Ihre E-Mail-Adresse" required>
+            <input type="text" name="subject" class="form-input" placeholder="Betreff" required>
+            <textarea name="message" class="form-input" rows="4" placeholder="Ihr Anliegen..." required></textarea>
+            
+            <!-- Honeypot zur Spam-Vermeidung (Standard-Programmierung) -->
+            <input type="text" name="_honeypot" style="display:none" tabindex="-1" autocomplete="off">
+            
+            <button type="submit" class="btn btn-solid" style="margin-top: 20px;">Anfrage sicher übertragen</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==============================================
+         7. IMPRESSUM (AUS ORIGINALDATEIEN)
+         ============================================== -->
+    <div id="view-impressum" class="page-view">
+      <div class="container hero" style="min-height: auto;">
+        <span class="subtitle">Legal</span>
+        <h1>Impressum.</h1>
+      </div>
+      <div class="container" style="margin-bottom: 100px;">
+        <p><strong>Majica Enterprises GmbH i.G.</strong><br>
+        Pater-Dionysius-Straße 41<br>
+        50737 Köln<br>
+        Deutschland</p>
+        <p><strong>Kontakt:</strong><br>
+        E-Mail: kontakt@majica-enterprises.de<br>
+        Internet: www.majica-enterprises.de</p>
+        <p><strong>Vertreten durch:</strong><br>
+        Die Geschäftsführung der Majica Enterprises</p>
+        <p><strong>Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV:</strong><br>
+        Majica Enterprises, Pater-Dionysius-Straße 41, 50737 Köln</p>
+      </div>
+    </div>
+
+    <!-- ==============================================
+         8. DATENSCHUTZ & COOKIES (AUS ORIGINALDATEIEN)
+         ============================================== -->
+    <div id="view-datenschutz" class="page-view">
+      <div class="container hero" style="min-height: auto;">
+        <span class="subtitle">Privacy</span>
+        <h1>Datenschutz & Cookies.</h1>
+      </div>
+      <div class="container" style="margin-bottom: 100px;">
+        <h2>1. Datenschutz auf einen Blick</h2>
+        <p>Die Integrität Ihrer Daten ist elementar. Die Verarbeitung erfolgt streng vertraulich und nach den höchsten Sicherheitsstandards der DSGVO durch die Majica Enterprises GmbH i.G., Pater-Dionysius-Straße 41, 50737 Köln.</p>
+        
+        <h2>2. Datenerfassung auf unserer Website</h2>
+        <p>Die Datennutzung erfolgt ausschließlich im Rahmen der gesetzlichen Bestimmungen. Wir erheben Daten (wie z. B. Ihre IP-Adresse), um eine fehlerfreie Bereitstellung der Website zu gewährleisten und um das Nutzerverhalten zu analysieren.</p>
+
+        <h2>3. Cookie-Richtlinie</h2>
+        <p>Diese Website verwendet technisch notwendige Cookies, um grundlegende Funktionen (wie den Session-Status oder Formular-Übertragungen) zu gewährleisten. Es werden keine Tracking-Cookies von Drittanbietern ohne Ihre ausdrückliche, vorherige Zustimmung gesetzt. Sie können Ihren Browser so einstellen, dass Sie über das Setzen von Cookies informiert werden und Cookies nur im Einzelfall erlauben.</p>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="container">
+    <div>
+      <a href="/impressum/" data-route="/impressum/">Impressum</a> &nbsp;&nbsp;|&nbsp;&nbsp; 
+      <a href="/datenschutz/" data-route="/datenschutz/">Datenschutz & Cookies</a>
+    </div>
+    <div>© 2026 MAJICA ENTERPRISES. PATER-DIONYSIUS-STRASSE 41, KÖLN.</div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      
+      /* --- 1. SPA ROUTER LOGIC --- */
+      const views = {
+        '/': document.getElementById('view-home'),
+        '/ueber-uns/': document.getElementById('view-ueber-uns'),
+        '/geschaeftsbereiche/': document.getElementById('view-geschaeftsbereiche'),
+        '/team/': document.getElementById('view-team'),
+        '/innovation/': document.getElementById('view-innovation'),
+        '/kontakt/': document.getElementById('view-kontakt'),
+        '/impressum/': document.getElementById('view-impressum'),
+        '/datenschutz/': document.getElementById('view-datenschutz')
+      };
+
+      function navigateTo(path, push = true) {
+        let cleanPath = path;
+        if (!cleanPath.endsWith('/') && !cleanPath.includes('.')) cleanPath += '/';
+        const targetView = views[cleanPath] || views['/'];
+
+        document.querySelectorAll('.page-view').forEach(v => {
+          v.classList.remove('active');
+          v.style.animation = 'none';
+          v.offsetHeight; 
+          v.style.animation = null; 
+        });
+        targetView.classList.add('active');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+
+        document.querySelectorAll('[data-route]').forEach(link => {
+          if(link.classList.contains('nav-links')) return; 
+          if (link.getAttribute('data-route') === cleanPath && link.closest('ul')) {
+            link.classList.add('active');
+          } else {
+            link.classList.remove('active');
+          }
+        });
+
+        document.getElementById('nav-links').classList.remove('open');
+        document.getElementById('hamburger').classList.remove('active');
+
+        if (push && window.location.pathname !== cleanPath) {
+          try { history.pushState({ route: cleanPath }, '', cleanPath); } catch(e) {}
+        }
+      }
+
+      document.querySelectorAll('[data-route]').forEach(link => {
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          navigateTo(link.getAttribute('data-route'));
+        });
+      });
+
+      window.addEventListener('popstate', (e) => {
+        navigateTo(e.state ? e.state.route : window.location.pathname, false);
+      });
+      navigateTo(window.location.pathname, false);
+
+      /* --- 2. MOBILE MENU --- */
+      document.getElementById('hamburger').addEventListener('click', function() {
+        this.classList.toggle('active');
+        document.getElementById('nav-links').classList.toggle('open');
+      });
+
+      /* --- 3. LUXURY CUSTOM CURSOR --- */
+      const dot = document.getElementById('cursor-dot');
+      const ring = document.getElementById('cursor-ring');
+      
+      window.addEventListener('mousemove', (e) => {
+        dot.style.left = `${e.clientX}px`; 
+        dot.style.top = `${e.clientY}px`;
+        ring.animate({ left: `${e.clientX}px`, top: `${e.clientY}px` }, { duration: 250, fill: "forwards" });
+      });
+
+      document.querySelectorAll('a, button, input, textarea, .toggle-btn, .color-btn').forEach(el => {
+        el.addEventListener('mouseenter', () => {
+          ring.style.width = '60px'; ring.style.height = '60px';
+          ring.style.backgroundColor = 'rgba(149, 193, 230, 0.05)';
+          ring.style.borderColor = 'rgba(149, 193, 230, 0.8)';
+        });
+        el.addEventListener('mouseleave', () => {
+          ring.style.width = '40px'; ring.style.height = '40px';
+          ring.style.backgroundColor = 'transparent';
+          ring.style.borderColor = 'rgba(149, 193, 230, 0.4)';
+        });
+      });
+
+      /* --- 4. ADVANCED LOGO CREATOR LOGIC --- */
+      const canvas = document.getElementById('creator-canvas');
+      const ctx = canvas.getContext('2d');
+      const textInput = document.getElementById('creator-text');
+      const shapeBtns = document.querySelectorAll('.toggle-btn');
+      const colorBtns = document.querySelectorAll('.color-btn');
+      const scaleInput = document.getElementById('creator-scale');
+      const rotateInput = document.getElementById('creator-rotate');
+      const valScale = document.getElementById('val-scale');
+      const valRotate = document.getElementById('val-rotate');
+      const uploadInput = document.getElementById('creator-upload');
+      const downloadBtn = document.getElementById('creator-download');
+
+      let currentShape = 'square';
+      let currentBgType = 'gradient';
+      let currentGradient = ['#95C1E6', '#272F7A']; // grad-0
+      let uploadedImage = null;
+
+      const gradients = {
+        'grad-0': ['#95C1E6', '#272F7A'],
+        'grad-1': ['#1e293b', '#000000'],
+        'grad-2': ['#ff7e5f', '#feb47b'],
+        'grad-3': ['#00C9FF', '#92FE9D'],
+        'grad-4': ['#8E2DE2', '#4A00E0']
+      };
+
+      // Live Draw Function
+      function drawCanvas() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        // 1. Clipping Path (Shape)
+        ctx.save();
+        ctx.beginPath();
+        if (currentShape === 'circle') {
+          ctx.arc(400, 400, 400, 0, Math.PI * 2);
+        } else {
+          ctx.roundRect(0, 0, 800, 800, 120); // Rounded Square
+        }
+        ctx.clip();
+
+        // 2. Background
+        if (currentBgType === 'image' && uploadedImage) {
+          // Fill image (cover style)
+          const scale = Math.max(800 / uploadedImage.width, 800 / uploadedImage.height);
+          const x = (800 / 2) - (uploadedImage.width / 2) * scale;
+          const y = (800 / 2) - (uploadedImage.height / 2) * scale;
+          ctx.drawImage(uploadedImage, x, y, uploadedImage.width * scale, uploadedImage.height * scale);
+        } else {
+          const grad = ctx.createLinearGradient(0, 0, 800, 800);
+          grad.addColorStop(0, currentGradient[0]);
+          grad.addColorStop(1, currentGradient[1]);
+          ctx.fillStyle = grad;
+          ctx.fillRect(0, 0, 800, 800);
+        }
+        ctx.restore();
+
+        // 3. Text (Rotated & Scaled)
+        const text = textInput.value || 'M';
+        const scale = scaleInput.value / 100;
+        const rotate = rotateInput.value * Math.PI / 180;
+
+        ctx.save();
+        ctx.translate(400, 400); // Move to center
+        ctx.rotate(rotate);
+        ctx.scale(scale, scale);
+
+        ctx.fillStyle = '#FFFFFF';
+        ctx.font = '800 350px "Helvetica Neue", Helvetica, sans-serif';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        
+        // Hakenkreuz filter
+        let safeText = text.toUpperCase();
+        if (/卐|卍|HAKENKREUZ/gi.test(safeText)) safeText = '❤️';
+        if (textInput.value !== safeText && textInput.value !== '') textInput.value = safeText;
+
+        ctx.fillText(safeText, 0, 20); // slight Y offset for exact vertical alignment
+        ctx.restore();
+      }
+
+      // Event Listeners for Creator
+      textInput.addEventListener('input', drawCanvas);
+      
+      scaleInput.addEventListener('input', (e) => {
+        valScale.textContent = `${e.target.value}%`;
+        drawCanvas();
+      });
+      
+      rotateInput.addEventListener('input', (e) => {
+        valRotate.textContent = `${e.target.value}°`;
+        drawCanvas();
+      });
+
+      shapeBtns.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          shapeBtns.forEach(b => b.classList.remove('active'));
+          e.target.classList.add('active');
+          currentShape = e.target.dataset.shape;
+          drawCanvas();
+        });
+      });
+
+      colorBtns.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          colorBtns.forEach(b => b.classList.remove('active'));
+          e.target.classList.add('active');
+          currentBgType = 'gradient';
+          currentGradient = gradients[e.target.dataset.grad];
+          drawCanvas();
+        });
+      });
+
+      uploadInput.addEventListener('change', (e) => {
+        const file = e.target.files[0];
+        if (file) {
+          const reader = new FileReader();
+          reader.onload = (event) => {
+            const img = new Image();
+            img.onload = () => {
+              uploadedImage = img;
+              currentBgType = 'image';
+              colorBtns.forEach(b => b.classList.remove('active'));
+              drawCanvas();
+            }
+            img.src = event.target.result;
+          }
+          reader.readAsDataURL(file);
+        }
+      });
+
+      downloadBtn.addEventListener('click', () => {
+        const link = document.createElement('a');
+        link.download = 'MAJICA_Creative_Asset.png';
+        link.href = canvas.toDataURL('image/png');
+        link.click();
+      });
+
+      // Initial Draw
+      drawCanvas();
+
+    });
+  </script>
+</body>
+</html>
