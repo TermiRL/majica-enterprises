@@ -254,7 +254,6 @@
     .canvas-wrapper {
         position: relative; width: 100%; max-width: 340px; aspect-ratio: 1 / 1;
         border-radius: 2rem; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5); overflow: hidden;
-        /* Transparenz-Muster */
         background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAMUlEQVQ4T2NkYNgfQEhD/4nEiMIMDAxEG8RII4rLgEEW4tWMWgBRJ6O2gIETxOgAAwBf4Q/h+GqNkwAAAABJRU5ErkJggg==');
     }
     canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
@@ -469,7 +468,7 @@
     </div>
 
     <!-- ==============================================
-         6. KONTAKT (INKL. PROGRAMMIERUNG AUS URSPRUNG)
+         6. KONTAKT
          ============================================== -->
     <div id="view-kontakt" class="page-view">
       <div class="container hero" style="min-height: auto;">
@@ -478,13 +477,12 @@
         <p>Treten Sie in den Dialog. Das Formular ist an das Backend-System gekoppelt, um Ihre Anfrage sicher an unser Atelier zu leiten.</p>
       </div>
       <div class="container">
-<form class="contact-form" id="main-contact-form">
-  <input type="text" name="name" class="form-input" placeholder="Name / Organisation" required>
-  <input type="email" name="email" class="form-input" placeholder="E-Mail" required>
-  <textarea name="message" class="form-input" rows="4" placeholder="Ihr Anliegen..." required></textarea>
-  <button type="submit" class="btn btn-solid" style="margin-top: 20px;">Anfrage senden</button>
-</form>        
-        </div>
+        <form class="contact-form" id="main-contact-form">
+          <input type="text" name="name" class="form-input" placeholder="Name / Organisation" required>
+          <input type="email" name="email" class="form-input" placeholder="E-Mail" required>
+          <textarea name="message" class="form-input" rows="4" placeholder="Ihr Anliegen..." required></textarea>
+          <button type="submit" class="btn btn-solid" style="margin-top: 20px;">Anfrage senden</button>
+        </form>
       </div>
     </div>
 
@@ -670,7 +668,6 @@
 
         // 2. Background
         if (currentBgType === 'image' && uploadedImage) {
-          // Fill image (cover style)
           const scale = Math.max(800 / uploadedImage.width, 800 / uploadedImage.height);
           const x = (800 / 2) - (uploadedImage.width / 2) * scale;
           const y = (800 / 2) - (uploadedImage.height / 2) * scale;
@@ -699,16 +696,14 @@
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
         
-        // Hakenkreuz filter
         let safeText = text.toUpperCase();
         if (/卐|卍|HAKENKREUZ/gi.test(safeText)) safeText = '❤️';
         if (textInput.value !== safeText && textInput.value !== '') textInput.value = safeText;
 
-        ctx.fillText(safeText, 0, 20); // slight Y offset for exact vertical alignment
+        ctx.fillText(safeText, 0, 20); 
         ctx.restore();
       }
 
-      // Event Listeners for Creator
       textInput.addEventListener('input', drawCanvas);
       
       scaleInput.addEventListener('input', (e) => {
@@ -758,7 +753,7 @@
         }
       });
 
-     downloadBtn.addEventListener('click', () => {
+      downloadBtn.addEventListener('click', () => {
         const link = document.createElement('a');
         link.download = 'MAJICA_Creative_Asset.png';
         link.href = canvas.toDataURL('image/png');
@@ -774,37 +769,37 @@
         const submitBtn = contactForm.querySelector('button[type="submit"]');
 
         contactForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
+          // Verhindert das Neuladen/Weiterleiten der Seite
+          e.preventDefault();
 
-            const formData = new FormData(contactForm);
-            // Dein API-Key wird hier sicher übergeben
-            formData.append("access_key", "6b2eb8b5-2037-4b56-8012-afecab46e2c2");
+          const formData = new FormData(contactForm);
+          formData.append("access_key", "6b2eb8b5-2037-4b56-8012-afecab46e2c2");
 
-            const originalText = submitBtn.textContent;
-            submitBtn.textContent = "Sending...";
-            submitBtn.disabled = true;
+          const originalText = submitBtn.textContent;
+          submitBtn.textContent = "Sending...";
+          submitBtn.disabled = true;
 
-            try {
-                const response = await fetch("https://api.web3forms.com/submit", {
-                    method: "POST",
-                    body: formData
-                });
+          try {
+            const response = await fetch("https://api.web3forms.com/submit", {
+              method: "POST",
+              body: formData
+            });
 
-                const data = await response.json();
+            const data = await response.json();
 
-                if (response.ok) {
-                    alert("Erfolg! Ihre Nachricht wurde sicher an das Atelier übermittelt.");
-                    contactForm.reset();
-                } else {
-                    alert("Fehler: " + data.message);
-                }
-
-            } catch (error) {
-                alert("Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut.");
-            } finally {
-                submitBtn.textContent = originalText;
-                submitBtn.disabled = false;
+            if (response.ok) {
+              alert("Erfolg! Ihre Nachricht wurde sicher an das Atelier übermittelt.");
+              contactForm.reset();
+            } else {
+              alert("Fehler: " + data.message);
             }
+
+          } catch (error) {
+            alert("Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut.");
+          } finally {
+            submitBtn.textContent = originalText;
+            submitBtn.disabled = false;
+          }
         });
       }
 
@@ -812,4 +807,3 @@
   </script>
 </body>
 </html>
-
