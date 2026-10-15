@@ -478,19 +478,12 @@
         <p>Treten Sie in den Dialog. Das Formular ist an das Backend-System gekoppelt, um Ihre Anfrage sicher an unser Atelier zu leiten.</p>
       </div>
       <div class="container">
-        <div class="form-box">
-          <!-- Backend Action: Hier wird auf den Standard-Mail/PHP-Service des Original-Indexes referenziert -->
-          <form action="send_mail.php" method="POST" class="contact-form" id="main-contact-form">
-            <input type="text" name="name" class="form-input" placeholder="Name / Organisation" required>
-            <input type="email" name="email" class="form-input" placeholder="Ihre E-Mail-Adresse" required>
-            <input type="text" name="subject" class="form-input" placeholder="Betreff" required>
-            <textarea name="message" class="form-input" rows="4" placeholder="Ihr Anliegen..." required></textarea>
-            
-            <!-- Honeypot zur Spam-Vermeidung (Standard-Programmierung) -->
-            <input type="text" name="_honeypot" style="display:none" tabindex="-1" autocomplete="off">
-            
-            <button type="submit" class="btn btn-solid" style="margin-top: 20px;">Anfrage sicher übertragen</button>
-          </form>
+<form class="contact-form" id="main-contact-form">
+  <input type="text" name="name" class="form-input" placeholder="Name / Organisation" required>
+  <input type="email" name="email" class="form-input" placeholder="E-Mail" required>
+  <textarea name="message" class="form-input" rows="4" placeholder="Ihr Anliegen..." required></textarea>
+  <button type="submit" class="btn btn-solid" style="margin-top: 20px;">Anfrage senden</button>
+</form>        
         </div>
       </div>
     </div>
@@ -504,17 +497,17 @@
         <h1>Impressum.</h1>
       </div>
       <div class="container" style="margin-bottom: 100px;">
-        <p><strong>Majica Enterprises GmbH i.G.</strong><br>
+        <p><strong>Majica Enterprises</strong><br>
         Pater-Dionysius-Straße 41<br>
-        50737 Köln<br>
+        50767 Köln<br>
         Deutschland</p>
         <p><strong>Kontakt:</strong><br>
-        E-Mail: kontakt@majica-enterprises.de<br>
+        E-Mail: hello@majica-enterprises.de<br>
         Internet: www.majica-enterprises.de</p>
         <p><strong>Vertreten durch:</strong><br>
         Die Geschäftsführung der Majica Enterprises</p>
         <p><strong>Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV:</strong><br>
-        Majica Enterprises, Pater-Dionysius-Straße 41, 50737 Köln</p>
+        Majica Enterprises, Pater-Dionysius-Straße 41, 50767 Köln</p>
       </div>
     </div>
 
@@ -528,7 +521,7 @@
       </div>
       <div class="container" style="margin-bottom: 100px;">
         <h2>1. Datenschutz auf einen Blick</h2>
-        <p>Die Integrität Ihrer Daten ist elementar. Die Verarbeitung erfolgt streng vertraulich und nach den höchsten Sicherheitsstandards der DSGVO durch die Majica Enterprises GmbH i.G., Pater-Dionysius-Straße 41, 50737 Köln.</p>
+        <p>Die Integrität Ihrer Daten ist elementar. Die Verarbeitung erfolgt streng vertraulich und nach den höchsten Sicherheitsstandards der DSGVO durch die Majica Enterprises, Pater-Dionysius-Straße 41, 50767 Köln.</p>
         
         <h2>2. Datenerfassung auf unserer Website</h2>
         <p>Die Datennutzung erfolgt ausschließlich im Rahmen der gesetzlichen Bestimmungen. Wir erheben Daten (wie z. B. Ihre IP-Adresse), um eine fehlerfreie Bereitstellung der Website zu gewährleisten und um das Nutzerverhalten zu analysieren.</p>
@@ -765,7 +758,7 @@
         }
       });
 
-      downloadBtn.addEventListener('click', () => {
+     downloadBtn.addEventListener('click', () => {
         const link = document.createElement('a');
         link.download = 'MAJICA_Creative_Asset.png';
         link.href = canvas.toDataURL('image/png');
@@ -775,7 +768,48 @@
       // Initial Draw
       drawCanvas();
 
+      /* --- 5. KONTAKTFORMULAR WEB3FORMS (AJAX) --- */
+      const contactForm = document.getElementById('main-contact-form');
+      if (contactForm) {
+        const submitBtn = contactForm.querySelector('button[type="submit"]');
+
+        contactForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const formData = new FormData(contactForm);
+            // Dein API-Key wird hier sicher übergeben
+            formData.append("access_key", "6b2eb8b5-2037-4b56-8012-afecab46e2c2");
+
+            const originalText = submitBtn.textContent;
+            submitBtn.textContent = "Sending...";
+            submitBtn.disabled = true;
+
+            try {
+                const response = await fetch("https://api.web3forms.com/submit", {
+                    method: "POST",
+                    body: formData
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    alert("Erfolg! Ihre Nachricht wurde sicher an das Atelier übermittelt.");
+                    contactForm.reset();
+                } else {
+                    alert("Fehler: " + data.message);
+                }
+
+            } catch (error) {
+                alert("Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut.");
+            } finally {
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+            }
+        });
+      }
+
     });
   </script>
 </body>
 </html>
+
